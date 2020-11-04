@@ -24,6 +24,10 @@ Configured base on the following [blog](https://medium.com/angular-in-depth/migr
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
+## Linting & Formatting
+
+Linting with [ESLint and Prettier](https://dev.to/dreiv/using-eslint-and-prettier-with-vscode-in-an-angular-project-42ib)
+
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
