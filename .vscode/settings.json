@@ -1,4 +1,11 @@
 {
+  "[yml]": {
+    "editor.defaultFormatter": "vscode-github-actions",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "editor.formatOnSave": true
+  },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.codeActionsOnSave": {
