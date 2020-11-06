@@ -33,7 +33,6 @@
     "@angular/cli": "~10.2.0",
     "@angular/compiler-cli": "~10.2.0",
     "@briebug/cypress-schematic": "^4.3.0",
-    "@cypress/webpack-preprocessor": "5.4.10",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
