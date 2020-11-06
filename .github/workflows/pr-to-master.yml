@@ -39,6 +39,8 @@ jobs:
         with:
           start: npm start
           env: host=localhost,port=4200
+          wait-on: http-get://localhost:4200
+          wait-on-timeout: 180
           browser: chrome
           headless: true
           # working-directory: examples/basic
