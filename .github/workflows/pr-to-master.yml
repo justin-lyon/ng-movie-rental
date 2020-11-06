@@ -38,6 +38,7 @@ jobs:
         # because we are running these examples in a monorepo
         with:
           start: npm start
+          env: host=localhost,port=4200
           browser: chrome
           headless: true
           # working-directory: examples/basic
