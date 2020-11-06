@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Install
       - run: npm ci
@@ -27,7 +27,7 @@ jobs:
         # the parameters below are only necessary
         # because we are running these examples in a monorepo
         with:
-          working-directory: examples/basic
+          # working-directory: examples/basic
           # just for full picture after installing Cypress
           # print information about detected browsers, etc
           # see https://on.cypress.io/command-line#cypress-info
