@@ -8,8 +8,9 @@
     "test": "jest",
     "test:watch": "jest -o --watch",
     "test:coverage": "jest --coverage",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "test:cypress": "cypress run --headless --browser chromium",
+    "e2e": "npm run test && npm run test:cypress",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
