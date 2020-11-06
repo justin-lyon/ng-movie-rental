@@ -37,6 +37,7 @@ jobs:
         # the parameters below are only necessary
         # because we are running these examples in a monorepo
         with:
+          start: npm start
           browser: chrome
           headless: true
           # working-directory: examples/basic
