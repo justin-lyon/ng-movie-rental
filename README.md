@@ -16,11 +16,17 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run tests with `npm test` using [jest](https://jestjs.io/docs/en/getting-started.html)
+
+Configured base on the following [blog](https://medium.com/angular-in-depth/migrate-your-angular-library-to-jest-faba9579591a)
 
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Linting & Formatting
+
+Linting with [ESLint and Prettier](https://dev.to/dreiv/using-eslint-and-prettier-with-vscode-in-an-angular-project-42ib)
 
 ## Further help
 
