@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: App CI
 
 on:
   pull_request:
@@ -9,25 +9,44 @@ on:
 
 jobs:
   pull-request-gate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        node-version: [ 12.x ]
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - name: Install
-      - run: npm ci 
-      
-      - name: Jest Tests
-      - run: npm test
+        run: npm install
 
-      - name: Cypress tests
-        # normally you would write
+      - name: Check Lint && Format
+        run: npm run lint:validate
+
+      - name: Jest Tests
+        run: npm test
+
+      - name: Cypress Tests
         uses: cypress-io/github-action@v2
+        # normally you would write
         # uses: ./
         # the parameters below are only necessary
         # because we are running these examples in a monorepo
         with:
-          working-directory: examples/basic
+          start: npm start
+          env: host=localhost,port=4200
+          wait-on: http://localhost:4200
+          wait-on-timeout: 180
+          browser: chrome
+          headless: true
+          # working-directory: examples/basic
           # just for full picture after installing Cypress
           # print information about detected browsers, etc
           # see https://on.cypress.io/command-line#cypress-info

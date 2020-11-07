@@ -1,0 +1,37 @@
+name: App Build
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        node-version: [ 12.x ]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install
+        run: npm Install
+
+      - name: Build
+        run: npm build
+
+      - name: Push to Dist Repo
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.GH_API_KEY }}
+        with:
+          source-directory: 'dist'
+          destination-github-username: 'jlyon87'
+          destination-repository-name: 'ng-movie-rental-dist'
