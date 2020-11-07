@@ -1,7 +1,7 @@
 name: App Build
 
 on:
-  commit:
+  push:
     branches: [ master ]
 
 jobs:
@@ -26,4 +26,13 @@ jobs:
 
       - name: Build
         run: npm build
+
+      - name: Push to Dist Repo
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.GH_API_KEY }}
+        with:
+          source-directory: 'dist'
+          destination-github-username: 'jlyon87'
+          destination-repository-name: 'ng-movie-rental-dist',
 
