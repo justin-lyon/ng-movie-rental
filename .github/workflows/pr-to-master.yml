@@ -26,6 +26,11 @@ jobs:
 
       - name: Install
         run: npm install
+        with:
+          start: npm start
+
+      - name: Check Lint && Format
+        run: npm run lint:validate
 
       - name: Jest Tests
         run: npm test
@@ -37,7 +42,7 @@ jobs:
         # the parameters below are only necessary
         # because we are running these examples in a monorepo
         with:
-          start: npm start
+          # start: npm start
           env: host=localhost,port=4200
           wait-on: http://localhost:4200
           wait-on-timeout: 180
