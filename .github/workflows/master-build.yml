@@ -33,5 +33,7 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.GH_API_KEY }}
         with:
           source-directory: 'dist'
-          destination-github-username: 'jlyon87'
+          destination-github-username: 'Github Action'
           destination-repository-name: 'ng-movie-rental-dist'
+          user-email: 'action@github.com'
+          commit-message: 'Deployment'
