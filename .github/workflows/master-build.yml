@@ -34,5 +34,4 @@ jobs:
         with:
           source-directory: 'dist'
           destination-github-username: 'jlyon87'
-          destination-repository-name: 'ng-movie-rental-dist',
-
+          destination-repository-name: 'ng-movie-rental-dist'
