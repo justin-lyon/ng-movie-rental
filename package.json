@@ -6,9 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "jest",
+    "test:int": "cypress run --headless --browser chromium",
     "test:watch": "jest -o --watch",
     "test:coverage": "jest --coverage",
-    "test:cypress": "cypress run --headless --browser chromium",
     "e2e": "npm run test && npm run test:cypress",
     "lint": "tsc --noEmit && eslint . --ext js,ts --quiet --fix && prettier --write .",
     "lint:validate": "tsc --noEmit && eslint . --ext js,ts --quiet && prettier --check ."
