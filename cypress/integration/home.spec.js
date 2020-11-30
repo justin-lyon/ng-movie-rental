@@ -15,6 +15,6 @@ describe('the home page', () => {
     cy.get('mat-sidenav').contains('Menu');
     cy.get('mat-sidenav').contains('Home');
     cy.get('mat-sidenav').contains('My Account');
-    cy.get('mat-sidenav').contains('Preferences');
+    cy.get('mat-sidenav').contains('Settings');
   });
 });
