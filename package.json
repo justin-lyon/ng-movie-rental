@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "jest",
+    "test:all": "npm run lint && npm test && npm run test:int",
     "test:int": "cypress run --headless --browser chromium --config video=false",
     "test:watch": "jest -o --watch",
     "test:coverage": "jest --coverage",
