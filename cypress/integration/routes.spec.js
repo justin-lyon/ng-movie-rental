@@ -14,6 +14,16 @@ describe('the router', () => {
     cy.url().should('eq', 'http://localhost:4200/account');
   });
 
+  it('should route to /login', () => {
+    cy.visit('/login');
+    cy.url().should('eq', 'http://localhost:4200/login');
+  });
+
+  it('should route to /signup', () => {
+    cy.visit('/signup');
+    cy.url().should('eq', 'http://localhost:4200/signup');
+  });
+
   it('should route to /settings', () => {
     cy.visit('/settings');
     cy.url().should('eq', 'http://localhost:4200/settings');
