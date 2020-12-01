@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PagesRoutingModule } from './pages-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { AccountComponent } from './account/account.component';
 import { HomeComponent } from './home/home.component';
@@ -17,6 +18,6 @@ import { SignupComponent } from './signup/signup.component';
     SettingsComponent,
     SignupComponent
   ],
-  imports: [CommonModule, PagesRoutingModule]
+  imports: [CommonModule, PagesRoutingModule, SharedModule]
 })
 export class PagesModule {}

@@ -1,4 +1,13 @@
-<!-- <div fxLayout="column" [formGroup]="form">
-  <mat-form-field></mat-form-field>
-</div> -->
-<p>signup works</p>
+<div fxLayout="column" [formGroup]="form">
+  <mat-form-field appearance="standard">
+    <mat-label>Email</mat-label>
+    <input
+      type="text"
+      matInput
+      placeHolder="Email"
+      formControlName="email"
+      required
+    />
+    <!-- <mat-error *ngIf="email.required">Email is required.</mat-error> -->
+  </mat-form-field>
+</div>
