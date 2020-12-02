@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PagesRoutingModule } from './pages-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
 import { AccountComponent } from './account/account.component';
@@ -18,6 +17,6 @@ import { SignupComponent } from './signup/signup.component';
     SettingsComponent,
     SignupComponent
   ],
-  imports: [CommonModule, PagesRoutingModule, SharedModule]
+  imports: [CommonModule, SharedModule]
 })
 export class PagesModule {}

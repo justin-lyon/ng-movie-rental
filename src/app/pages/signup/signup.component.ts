@@ -6,14 +6,16 @@ import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  constructor(form: FormGroup, private fb: FormBuilder);
+  signupForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.initForm();
   }
 
   initForm(): void {
-    this.form = this.fb.group({
+    this.signupForm = this.fb.group({
       email: [''],
       password: ['']
     });

@@ -1,4 +1,4 @@
-<div fxLayout="column" [formGroup]="form">
+<div fxLayout="column" [formGroup]="signupForm">
   <mat-form-field appearance="standard">
     <mat-label>Email</mat-label>
     <input
@@ -8,6 +8,8 @@
       formControlName="email"
       required
     />
-    <!-- <mat-error *ngIf="email.required">Email is required.</mat-error> -->
+    <mat-error *ngIf="signupForm.controls.email.hasError('required')">
+      This field is required.
+    </mat-error>
   </mat-form-field>
 </div>

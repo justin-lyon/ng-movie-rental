@@ -1,25 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LayoutModule } from '@angular/cdk/layout';
+
+import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { RouterModule } from '@angular/router';
+import { LayoutModule } from '@angular/cdk/layout';
 import { MaterialModule } from '../material.module';
 
 import { NaviComponent } from './navi/navi.component';
+import { RouterModule } from '@angular/router';
 
-const passThroughs = [
+const sharedModules = [
+  BrowserModule,
   FlexLayoutModule,
+  FormsModule,
   LayoutModule,
   MaterialModule,
-  FormsModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  RouterModule
 ];
 
 @NgModule({
   declarations: [NaviComponent],
-  exports: [NaviComponent, ...passThroughs],
-  imports: [CommonModule, RouterModule, ...passThroughs]
+  imports: [CommonModule, ...sharedModules],
+  exports: [NaviComponent, ...sharedModules]
 })
 export class SharedModule {}
