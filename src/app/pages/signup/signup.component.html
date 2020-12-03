@@ -67,12 +67,6 @@
         <mat-error *ngIf="signupForm.controls.password1.getError('pattern')">
           Password must have at least: 1 lowercase letter, 1 uppercase letter, 1
           number, and 1 special character
-          <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="standard">
@@ -99,6 +93,10 @@
           Minimum length of 8 characters. ({{
             signupForm.controls.password2.value.length
           }})
+        </mat-error>
+        <mat-error *ngIf="signupForm.controls.password2.getError('pattern')">
+          Password must have at least: 1 lowercase letter, 1 uppercase letter, 1
+          number, and 1 special character
         </mat-error>
       </mat-form-field>
     </mat-card-content>

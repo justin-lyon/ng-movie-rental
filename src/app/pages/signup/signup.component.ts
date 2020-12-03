@@ -7,16 +7,16 @@ import {
 } from '@angular/forms';
 import { ConfirmPasswordValidator } from 'src/app/common/validators/confirm-password.validator';
 
-const lowerPattern = /[a-z]{1,}/;
-const upperPattern = /[A-Z]{1,}/;
-const numberPattern = /\d{1,}/;
-const specialPattern = /#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]{1,}/;
+const lowerPattern = /[a-z]/;
+const upperPattern = /[A-Z]/;
+const numberPattern = /\d/;
+const specialPattern = /\p{P}/u;
 
 const passwordPatterns = [
   Validators.pattern(lowerPattern),
   Validators.pattern(upperPattern),
-  Validators.pattern(numberPattern)
-  // Validators.pattern(specialPattern)
+  Validators.pattern(numberPattern),
+  Validators.pattern(specialPattern)
 ];
 
 @Component({
