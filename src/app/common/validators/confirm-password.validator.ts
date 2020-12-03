@@ -1,10 +1,15 @@
-import { AbstractControl, FormGroup, ValidatorFn } from '@angular/forms';
+import {
+  AbstractControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn
+} from '@angular/forms';
 
 export function ConfirmPasswordValidator(
   controlName: string,
   matchingControlName: string
 ): ValidatorFn {
-  return (formGroup: FormGroup) => {
+  return (formGroup: FormGroup): ValidationErrors | null => {
     const control = formGroup.controls[controlName];
     const matchingControl = formGroup.controls[matchingControlName];
 
