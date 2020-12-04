@@ -29,6 +29,7 @@
           }})
         </mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="standard">
         <mat-label>Email</mat-label>
         <input
@@ -46,6 +47,7 @@
           This field is required.
         </mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="standard">
         <mat-label> Password </mat-label>
         <input
@@ -64,11 +66,28 @@
             signupForm.controls.password1.value.length
           }})
         </mat-error>
-        <mat-error *ngIf="signupForm.controls.password1.getError('pattern')">
-          Password must have at least: 1 lowercase letter, 1 uppercase letter, 1
-          number, and 1 special character
+        <mat-error
+          *ngIf="signupForm.controls.password1.getError('lowerPattern')"
+        >
+          Password must have at least 1 lowercase letter.
+        </mat-error>
+        <mat-error
+          *ngIf="signupForm.controls.password1.getError('upperPattern')"
+        >
+          Password must have at least 1 uppercase letter.
+        </mat-error>
+        <mat-error
+          *ngIf="signupForm.controls.password1.getError('numberPattern')"
+        >
+          Password must have at least 1 number.
+        </mat-error>
+        <mat-error
+          *ngIf="signupForm.controls.password1.getError('specialPattern')"
+        >
+          Password must have at least 1 special character.
         </mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="standard">
         <mat-label> Confirm Password </mat-label>
         <input
@@ -88,15 +107,6 @@
         </mat-error>
         <mat-error *ngIf="signupForm.controls.password2.getError('required')">
           This field is required.
-        </mat-error>
-        <mat-error *ngIf="signupForm.controls.password2.getError('minlength')">
-          Minimum length of 8 characters. ({{
-            signupForm.controls.password2.value.length
-          }})
-        </mat-error>
-        <mat-error *ngIf="signupForm.controls.password2.getError('pattern')">
-          Password must have at least: 1 lowercase letter, 1 uppercase letter, 1
-          number, and 1 special character
         </mat-error>
       </mat-form-field>
     </mat-card-content>
