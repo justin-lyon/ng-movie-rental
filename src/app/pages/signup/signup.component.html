@@ -58,33 +58,8 @@
           required
         />
         <mat-hint> The stronger the better </mat-hint>
-        <mat-error *ngIf="signupForm.controls.password1.getError('required')">
-          This field is required.
-        </mat-error>
-        <mat-error *ngIf="signupForm.controls.password1.getError('minlength')">
-          Minimum length of 8 characters. ({{
-            signupForm.controls.password1.value.length
-          }})
-        </mat-error>
-        <mat-error
-          *ngIf="signupForm.controls.password1.getError('lowerPattern')"
-        >
-          Password must have at least 1 lowercase letter.
-        </mat-error>
-        <mat-error
-          *ngIf="signupForm.controls.password1.getError('upperPattern')"
-        >
-          Password must have at least 1 uppercase letter.
-        </mat-error>
-        <mat-error
-          *ngIf="signupForm.controls.password1.getError('numberPattern')"
-        >
-          Password must have at least 1 number.
-        </mat-error>
-        <mat-error
-          *ngIf="signupForm.controls.password1.getError('specialPattern')"
-        >
-          Password must have at least 1 special character.
+        <mat-error *ngIf="signupForm.controls.password1.invalid">
+          {{ passwordErrorMessage() }}
         </mat-error>
       </mat-form-field>
 
