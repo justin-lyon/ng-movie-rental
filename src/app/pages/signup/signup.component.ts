@@ -8,7 +8,9 @@ import {
 import {
   ConfirmPasswordValidator,
   NamedPatternValidator
-} from 'src/app/common/validators';
+} from '../../common/validators';
+import { NewUserModel } from '../../models';
+import { RegistrationService } from '../../services/registration.service';
 
 const lowerPattern = /[a-z]/;
 const upperPattern = /[A-Z]/;
@@ -39,7 +41,7 @@ export class SignupComponent implements OnInit {
     }
     const errors = Object.entries(
       this.signupForm.controls.password1.errors
-    ).map(item => ({ name: item[0], value: item[1] }));
+    ).map(pair => ({ name: pair[0], value: pair[1] }));
 
     const errorName = errors[0].name;
     switch (errorName) {
@@ -67,7 +69,10 @@ export class SignupComponent implements OnInit {
     return message;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private registrationService: RegistrationService
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -83,5 +88,11 @@ export class SignupComponent implements OnInit {
       },
       { validator: ConfirmPasswordValidator('password1', 'password2') }
     );
+  }
+
+  submit(): void {
+    const newUser = new NewUserModel();
+    // TODO - assign props on newUser from formgroup
+    this.registrationService.signup(newUser);
   }
 }

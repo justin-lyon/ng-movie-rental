@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MaterialModule } from '../material.module';
 
-import { NaviComponent } from './navi/navi.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RouterModule } from '@angular/router';
 
 const sharedModules = [
@@ -21,8 +21,8 @@ const sharedModules = [
 ];
 
 @NgModule({
-  declarations: [NaviComponent],
+  declarations: [NavBarComponent],
   imports: [CommonModule, ...sharedModules],
-  exports: [NaviComponent, ...sharedModules]
+  exports: [NavBarComponent, ...sharedModules]
 })
 export class SharedModule {}

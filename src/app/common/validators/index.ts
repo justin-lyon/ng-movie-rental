@@ -1,4 +1,2 @@
-import { ConfirmPasswordValidator } from './confirm-password.validator';
-import { NamedPatternValidator } from './named-pattern.validator';
-
-export { ConfirmPasswordValidator, NamedPatternValidator };
+export * from './confirm-password.validator';
+export * from './named-pattern.validator';
