@@ -9,6 +9,7 @@ import { MaterialModule } from '../material.module';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RouterModule } from '@angular/router';
+import { ToasterModule } from './toaster/toaster.module';
 
 const sharedModules = [
   BrowserModule,
@@ -22,7 +23,7 @@ const sharedModules = [
 
 @NgModule({
   declarations: [NavBarComponent],
-  imports: [CommonModule, ...sharedModules],
+  imports: [CommonModule, ...sharedModules, ToasterModule],
   exports: [NavBarComponent, ...sharedModules]
 })
 export class SharedModule {}
