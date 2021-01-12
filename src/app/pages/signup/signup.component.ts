@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import {
   FormControl,
   FormGroup,
@@ -30,6 +32,29 @@ const passwordPatterns = [
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private location: Location,
+    private registrationService: RegistrationService
+  ) {}
+
+  ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm(): void {
+    this.signupForm = this.fb.group(
+      {
+        username: ['', [Validators.minLength(2), Validators.maxLength(20)]],
+        email: ['', [Validators.email]],
+        password1: ['', [Validators.minLength(8), ...passwordPatterns]],
+        password2: ['']
+      },
+      { validator: ConfirmPasswordValidator('password1', 'password2') }
+    );
+  }
 
   passwordErrorMessage(): string {
     let message = '';
@@ -69,30 +94,22 @@ export class SignupComponent implements OnInit {
     return message;
   }
 
-  constructor(
-    private fb: FormBuilder,
-    private registrationService: RegistrationService
-  ) {}
-
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  initForm(): void {
-    this.signupForm = this.fb.group(
-      {
-        username: ['', [Validators.minLength(2), Validators.maxLength(20)]],
-        email: ['', [Validators.email]],
-        password1: ['', [Validators.minLength(8), ...passwordPatterns]],
-        password2: ['']
-      },
-      { validator: ConfirmPasswordValidator('password1', 'password2') }
-    );
-  }
-
   submit(): void {
-    const newUser = new NewUserModel();
-    // TODO - assign props on newUser from formgroup
-    this.registrationService.signup(newUser);
+    if (this.signupForm.invalid) {
+      throw new Error('Cannot submit an invalid form.');
+    }
+
+    const { username, email, password1: password } = this.signupForm.value;
+
+    const newUser: NewUserModel = {
+      username,
+      email,
+      password
+    };
+    this.registrationService.signup(newUser).subscribe(this.onSuccess);
+  }
+
+  onSuccess() {
+    this.router.navigate('/home');
   }
 }
