@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import {
   FormControl,
   FormGroup,
@@ -35,8 +34,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private location: Location,
+    private router: Router,
     private registrationService: RegistrationService
   ) {}
 
@@ -109,7 +107,7 @@ export class SignupComponent implements OnInit {
     this.registrationService.signup(newUser).subscribe(this.onSuccess);
   }
 
-  onSuccess() {
-    this.router.navigate('/home');
+  onSuccess(): void {
+    this.router.navigate(['/home']);
   }
 }
