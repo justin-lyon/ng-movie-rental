@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  FormControl,
-  FormGroup,
-  FormBuilder,
-  Validators
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { catchError, switchMap } from 'rxjs/operators';
+
 import {
   ConfirmPasswordValidator,
   NamedPatternValidator
 } from '../../common/validators';
 import { NewUserModel } from '../../models';
-import { RegistrationService } from '../../services/registration.service';
+import { AuthService } from './../../services/auth.service';
 
 const lowerPattern = /[a-z]/;
 const upperPattern = /[A-Z]/;
@@ -35,7 +32,7 @@ export class SignupComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private registrationService: RegistrationService
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -104,10 +101,12 @@ export class SignupComponent implements OnInit {
       email,
       password
     };
-    this.registrationService.signup(newUser).subscribe(this.onSuccess);
-  }
 
-  onSuccess(): void {
-    this.router.navigate(['/home']);
+    this.authService
+      .signup(newUser)
+      .pipe(switchMap(() => this.authService.login(newUser)))
+      .subscribe(() => {
+        this.router.navigate(['home']);
+      });
   }
 }
