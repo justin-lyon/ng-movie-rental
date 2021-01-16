@@ -54,11 +54,11 @@
           type="password"
           matInput
           placeHolder="Password"
-          formControlName="password1"
+          formControlName="password"
           required
         />
         <mat-hint> The stronger the better </mat-hint>
-        <mat-error *ngIf="signupForm.controls.password1.invalid">
+        <mat-error *ngIf="signupForm.controls.password.invalid">
           {{ passwordErrorMessage() }}
         </mat-error>
       </mat-form-field>

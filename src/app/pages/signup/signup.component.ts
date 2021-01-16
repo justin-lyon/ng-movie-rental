@@ -44,10 +44,10 @@ export class SignupComponent implements OnInit {
       {
         username: ['', [Validators.minLength(2), Validators.maxLength(20)]],
         email: ['', [Validators.email]],
-        password1: ['', [Validators.minLength(8), ...passwordPatterns]],
+        password: ['', [Validators.minLength(8), ...passwordPatterns]],
         password2: ['']
       },
-      { validator: ConfirmPasswordValidator('password1', 'password2') }
+      { validator: ConfirmPasswordValidator('password', 'password2') }
     );
   }
 
@@ -60,7 +60,7 @@ export class SignupComponent implements OnInit {
       return message;
     }
     const errors = Object.entries(
-      this.signupForm.controls.password1.errors
+      this.signupForm.controls.password.errors
     ).map(pair => ({ name: pair[0], value: pair[1] }));
 
     const errorName = errors[0].name;
@@ -69,7 +69,7 @@ export class SignupComponent implements OnInit {
         message = 'This field is required.';
         break;
       case 'minlength':
-        message = `Minimum length of 8 characters. (${this.signupForm.controls.password1.value.length})`;
+        message = `Minimum length of 8 characters. (${this.signupForm.controls.password.value.length})`;
         break;
       case 'lowerPattern':
         message = 'Password must have at least 1 lowercase letter.';
@@ -94,7 +94,7 @@ export class SignupComponent implements OnInit {
       throw new Error('Cannot submit an invalid form.');
     }
 
-    const { username, email, password1: password } = this.signupForm.value;
+    const { username, email, password } = this.signupForm.value;
 
     const newUser: NewUserModel = {
       username,
