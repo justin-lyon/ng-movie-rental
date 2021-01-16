@@ -113,7 +113,7 @@ export class SignupComponent implements OnInit {
         })
       )
       .subscribe(
-        res => {
+        () => {
           this.router.navigate(['home']);
         },
         error => {

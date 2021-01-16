@@ -1,9 +1,4 @@
-import {
-  AbstractControl,
-  FormGroup,
-  ValidationErrors,
-  ValidatorFn
-} from '@angular/forms';
+import { FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export function ConfirmPasswordValidator(
   controlName: string,

@@ -38,7 +38,6 @@ describe('NavBarComponent', () => {
   });
 
   it('should create the navi component', () => {
-    const cmp = fixture.componentInstance;
-    expect(cmp).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 });

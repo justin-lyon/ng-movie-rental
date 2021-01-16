@@ -6,13 +6,13 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "jest",
-    "test:all": "npm run lint && npm test && npm run test:int",
+    "test:all": "npm run lint:validate && npm test && npm run test:int",
     "test:int": "cypress run --headless --browser chromium --config video=false",
     "test:watch": "jest -o --watch",
     "test:coverage": "jest --coverage",
     "e2e": "npm run test && npm run test:cypress",
     "lint": "tsc --noEmit && eslint . --ext js,ts --quiet --fix && prettier --write .",
-    "lint:validate": "tsc --noEmit && eslint . --ext js,ts --quiet && prettier --check ."
+    "lint:validate": "tsc --noEmit && eslint ./src --ext js,ts --quiet && prettier --check ."
   },
   "private": true,
   "dependencies": {
