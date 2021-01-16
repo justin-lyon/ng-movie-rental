@@ -104,9 +104,21 @@ export class SignupComponent implements OnInit {
 
     this.authService
       .signup(newUser)
-      .pipe(switchMap(() => this.authService.login(newUser)))
-      .subscribe(() => {
-        this.router.navigate(['home']);
-      });
+      .pipe(
+        switchMap(() =>
+          this.authService.login(newUser.email, newUser.password)
+        ),
+        catchError(error => {
+          throw new Error(error.message);
+        })
+      )
+      .subscribe(
+        res => {
+          this.router.navigate(['home']);
+        },
+        error => {
+          console.error('error', error);
+        }
+      );
   }
 }

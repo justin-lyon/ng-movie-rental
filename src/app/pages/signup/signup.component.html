@@ -86,10 +86,15 @@
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="submit()">
+      <button mat-stroked-button color="basic">Cancel</button>
+      <button
+        [disabled]="signupForm.invalid"
+        mat-raised-button
+        color="primary"
+        (click)="submit()"
+      >
         Shall we?
       </button>
-      <button mat-stroked-button color="basic">Cancel</button>
     </mat-card-actions>
   </mat-card>
 </div>
