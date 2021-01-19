@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
 
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
@@ -40,6 +41,11 @@ describe('SignupComponent', () => {
   beforeEach(() => {
     router = TestBed.get(Router);
     authService = TestBed.get(AuthService);
+
+    router.navigate = jest.fn().mockReturnValue(of('mock value'));
+    authService.signup = jest.fn().mockReturnValue(of('mock value'));
+    authService.login = jest.fn().mockResolvedValue(of('mock value'));
+
     fixture = TestBed.createComponent(SignupComponent);
     loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;
