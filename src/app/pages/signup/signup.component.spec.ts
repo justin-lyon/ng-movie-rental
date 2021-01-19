@@ -73,22 +73,68 @@ describe('SignupComponent', () => {
     });
 
     it('should validate passwords are required', () => {
-      const controls = component.signupForm.controls;
-      controls.password.setValue('');
-      controls.password.updateValueAndValidity();
-      component.signupForm.pristine = jest.fn().mockReturnValue(true);
+      const password = component.signupForm.controls.password;
+      password.markAsTouched();
+      expect(password.invalid).toBeTruthy();
+      expect(password.errors.required).toBeTruthy();
+
       const message = component.passwordErrorMessage();
       expect(message).toBe('This field is required.');
     });
 
-    it('should validate min length 8', () => {});
+    it('should validate min length 8', () => {
+      const password = component.signupForm.controls.password;
+      password.markAsTouched();
+      password.setValue('A');
+      expect(password.invalid).toBeTruthy();
+      expect(password.errors.minlength).toBeTruthy();
 
-    it('should validate min 1 lower case letter', () => {});
+      const message = component.passwordErrorMessage();
+      expect(message).toBe('Minimum length of 8 characters. (1)');
+    });
 
-    it('should validate min 1 uppercase letter', () => {});
+    it('should validate min 1 lower case letter', () => {
+      const password = component.signupForm.controls.password;
+      password.markAsTouched();
+      password.setValue('ABCD1234');
+      expect(password.invalid).toBeTruthy();
+      expect(password.errors.lowerPattern).toBeTruthy();
 
-    it('should validate min 1 number', () => {});
+      const message = component.passwordErrorMessage();
+      expect(message).toBe('Password must have at least 1 lowercase letter.');
+    });
 
-    it('should validate min 1 special character', () => {});
+    it('should validate min 1 uppercase letter', () => {
+      const password = component.signupForm.controls.password;
+      password.markAsTouched();
+      password.setValue('abcd1234');
+      expect(password.invalid).toBeTruthy();
+      expect(password.errors.upperPattern).toBeTruthy();
+
+      const message = component.passwordErrorMessage();
+      expect(message).toBe('Password must have at least 1 uppercase letter.');
+    });
+
+    it('should validate min 1 number', () => {
+      const password = component.signupForm.controls.password;
+      password.markAsTouched();
+      password.setValue('Abcdefgh');
+      expect(password.invalid).toBeTruthy();
+      expect(password.errors.numberPattern).toBeTruthy();
+
+      const message = component.passwordErrorMessage();
+      expect(message).toBe('Password must have at least 1 number.');
+    });
+
+    it('should validate min 1 special character', () => {
+      const password = component.signupForm.controls.password;
+      password.markAsTouched();
+      password.setValue('Abcd1234');
+      expect(password.invalid).toBeTruthy();
+      expect(password.errors.specialPattern).toBeTruthy();
+
+      const message = component.passwordErrorMessage();
+      expect(message).toBe('Password must have at least 1 special character.');
+    });
   });
 });

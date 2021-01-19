@@ -42,10 +42,20 @@ export class SignupComponent implements OnInit {
   initForm(): void {
     this.signupForm = this.fb.group(
       {
-        username: ['', [Validators.minLength(2), Validators.maxLength(20)]],
-        email: ['', [Validators.email]],
-        password: ['', [Validators.minLength(8), ...passwordPatterns]],
-        password2: ['']
+        username: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(20)
+          ]
+        ],
+        email: ['', [Validators.required, Validators.email]],
+        password: [
+          '',
+          [Validators.required, Validators.minLength(8), ...passwordPatterns]
+        ],
+        password2: ['', Validators.required]
       },
       { validator: ConfirmPasswordValidator('password', 'password2') }
     );
@@ -53,12 +63,15 @@ export class SignupComponent implements OnInit {
 
   passwordErrorMessage(): string {
     let message = '';
+
     if (
-      this.signupForm.pristine ||
-      (this.signupForm.touched && this.signupForm.valid)
+      !this.signupForm.controls.password.errors ||
+      (this.signupForm.controls.password.untouched &&
+        this.signupForm.controls.password.valid)
     ) {
       return message;
     }
+
     const errors = Object.entries(
       this.signupForm.controls.password.errors
     ).map(pair => ({ name: pair[0], value: pair[1] }));
