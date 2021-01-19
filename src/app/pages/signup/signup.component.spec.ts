@@ -42,6 +42,8 @@ describe('SignupComponent', () => {
     router = TestBed.get(Router);
     authService = TestBed.get(AuthService);
 
+    // TODO - Mock with jest-marbles
+    // https://github.com/just-jeb/jest-marbles
     router.navigate = jest.fn().mockReturnValue(of('mock value'));
     authService.signup = jest.fn().mockReturnValue(of('mock value'));
     authService.login = jest.fn().mockResolvedValue(of('mock value'));
