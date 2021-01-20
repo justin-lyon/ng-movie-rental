@@ -59,6 +59,10 @@ describe('SignupComponent', () => {
   });
 
   describe('ngOnInit', () => {
+    beforeEach(() => {
+      component.initForm();
+    });
+
     it('should create a formgroup with inputs', () => {
       component.ngOnInit();
       expect(component.signupForm).toBeDefined();
@@ -72,6 +76,61 @@ describe('SignupComponent', () => {
       expect(email).toBeDefined();
       expect(password).toBeDefined();
       expect(password2).toBeDefined();
+    });
+
+    it('should require username.', () => {
+      const username = component.signupForm.controls.username;
+      username.markAsTouched();
+      expect(username.invalid).toBeTruthy();
+      expect(username.errors.required).toBeTruthy();
+    });
+
+    it('should require minlength 2, username', () => {
+      const username = component.signupForm.controls.username;
+      username.markAsTouched();
+      const tooshort = '1';
+      username.setValue(tooshort);
+      expect(username.invalid).toBeTruthy();
+      expect(username.errors.minlength).toBeTruthy();
+    });
+
+    it('should require maxlength 20, username', () => {
+      const username = component.signupForm.controls.username;
+      username.markAsTouched();
+      username.setValue('this-value-is-waaaaaaaaaaaaaaaaaaaaaaaaaay-too-long');
+      expect(username.invalid).toBeTruthy();
+      expect(username.errors.maxlength).toBeTruthy();
+    });
+
+    it('should require email.', () => {
+      const email = component.signupForm.controls.email;
+      email.markAsTouched();
+      expect(email.invalid).toBeTruthy();
+      expect(email.errors.required).toBeTruthy();
+    });
+
+    it('should require a valid email', () => {
+      const email = component.signupForm.controls.email;
+      email.markAsTouched();
+      email.setValue('invalid-email-address');
+      expect(email.invalid).toBeTruthy();
+      expect(email.errors.email).toBeTruthy();
+    });
+
+    it('should require password2', () => {
+      const password2 = component.signupForm.controls.password2;
+      password2.markAsTouched();
+      expect(password2.invalid).toBeTruthy();
+      expect(password2.errors.required).toBeTruthy();
+    });
+
+    it('should require password and password2 to match', () => {
+      component.signupForm.controls.password.setValue('Abc1234!');
+      const password2 = component.signupForm.controls.password2;
+      password2.markAsTouched();
+      password2.setValue('abc12345');
+      expect(password2.invalid).toBeTruthy();
+      expect(password2.errors.confirmPasswordValidator).toBeTruthy();
     });
   });
 
@@ -144,5 +203,9 @@ describe('SignupComponent', () => {
       const message = component.passwordErrorMessage();
       expect(message).toBe('Password must have at least 1 special character.');
     });
+  });
+
+  describe.only('submit', () => {
+    it('should create new user and log them in.', () => {});
   });
 });
