@@ -1,20 +1,29 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
-
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
 
 import { SignupComponent } from './signup.component';
 import { AuthService } from './../../services/auth.service';
+import { NewUserModel } from './../../models/new-user.model';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from '../home/home.component';
 
-jest.mock('@angular/router');
+const MOCK_USER_ID = 'new-user-id';
+const newUser: NewUserModel = {
+  username: 'i-smell-fear-on-you',
+  email: 'belcher.louise@hotmail.com',
+  password: 'kuchiK0pi!'
+};
+const MOCK_LOGIN_RESPONSE = `${newUser.username} i.ama.jwt`;
+
 jest.mock('./../../services/auth.service');
 describe('SignupComponent', () => {
   let component: SignupComponent;
@@ -32,21 +41,26 @@ describe('SignupComponent', () => {
         MatCardModule,
         MatFormFieldModule,
         MatInputModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        RouterTestingModule.withRoutes([
+          { path: 'home', component: HomeComponent }
+        ])
       ],
       providers: [Router, AuthService]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    router = TestBed.get(Router);
+    router = TestBed.inject(Router);
     authService = TestBed.get(AuthService);
 
     // TODO - Mock with jest-marbles
     // https://github.com/just-jeb/jest-marbles
-    router.navigate = jest.fn().mockReturnValue(of('mock value'));
-    authService.signup = jest.fn().mockReturnValue(of('mock value'));
-    authService.login = jest.fn().mockResolvedValue(of('mock value'));
+    router.navigate = jest.fn().mockResolvedValue(true);
+    authService.signup = jest
+      .fn()
+      .mockReturnValue(of({ id: MOCK_USER_ID, ...newUser }));
+    authService.login = jest.fn().mockResolvedValue(of(MOCK_LOGIN_RESPONSE));
 
     fixture = TestBed.createComponent(SignupComponent);
     loader = TestbedHarnessEnvironment.loader(fixture);
@@ -206,6 +220,23 @@ describe('SignupComponent', () => {
   });
 
   describe.only('submit', () => {
-    it('should create new user and log them in.', () => {});
+    it('should create new user and log them in.', () => {
+      component.signupForm.controls.username.setValue(newUser.username);
+      component.signupForm.controls.email.setValue(newUser.email);
+      component.signupForm.controls.password.setValue(newUser.password);
+      component.signupForm.controls.password2.setValue(newUser.password);
+
+      component.submit();
+
+      expect(authService.signup).toHaveBeenCalledTimes(1);
+      expect(authService.login).toHaveBeenCalledTimes(1);
+      expect(authService.signup).toHaveBeenCalledWith(newUser);
+      expect(authService.login).toHaveBeenCalledWith(
+        newUser.email,
+        newUser.password
+      );
+      expect(router.navigate).toHaveBeenCalledTimes(1);
+      expect(router.navigate).toHaveBeenCalledWith(['home']);
+    });
   });
 });
