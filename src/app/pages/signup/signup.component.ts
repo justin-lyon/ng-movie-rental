@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { catchError, switchMap } from 'rxjs/operators';
 
 import {
   ConfirmPasswordValidator,
-  NamedPatternValidator
+  namedValidator
 } from '../../common/validators';
 import { NewUserModel } from '../../models';
 import { AuthService } from './../../services/auth.service';
@@ -16,10 +15,10 @@ const numberPattern = /\d/;
 const specialPattern = /\p{P}/u;
 
 const passwordPatterns = [
-  NamedPatternValidator('lowerPattern', Validators.pattern(lowerPattern)),
-  NamedPatternValidator('upperPattern', Validators.pattern(upperPattern)),
-  NamedPatternValidator('numberPattern', Validators.pattern(numberPattern)),
-  NamedPatternValidator('specialPattern', Validators.pattern(specialPattern))
+  namedValidator('lowerPattern', Validators.pattern(lowerPattern)),
+  namedValidator('upperPattern', Validators.pattern(upperPattern)),
+  namedValidator('numberPattern', Validators.pattern(numberPattern)),
+  namedValidator('specialPattern', Validators.pattern(specialPattern))
 ];
 
 @Component({
@@ -102,7 +101,7 @@ export class SignupComponent implements OnInit {
     return message;
   }
 
-  submit(): void {
+  submit(): Promise<void> {
     if (this.signupForm.invalid) {
       throw new Error('Cannot submit an invalid form.');
     }
@@ -115,23 +114,16 @@ export class SignupComponent implements OnInit {
       password
     };
 
-    this.authService
+    return this.authService
       .signup(newUser)
-      .pipe(
-        switchMap(() =>
-          this.authService.login(newUser.email, newUser.password)
-        ),
-        catchError(error => {
-          throw new Error(error.message);
-        })
-      )
-      .subscribe(
-        () => {
-          this.router.navigate(['home']);
-        },
-        error => {
-          console.error('error', error);
-        }
-      );
+      .then(() => {
+        return this.authService.login(newUser.email, newUser.password);
+      })
+      .then(() => {
+        this.router.navigate(['home']);
+      })
+      .catch(error => {
+        console.error('Unhandled error:', error);
+      });
   }
 }

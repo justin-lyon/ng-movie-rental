@@ -1,9 +1,7 @@
 import { Router } from '@angular/router';
-import { NewUserModel } from '../models';
+import { NewUserModel, UserModel } from '../models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
 const SIGNUP_PATH = 'signup';
 const PATH = 'auth/login';
@@ -15,19 +13,19 @@ const TOKEN_STORAGE = 'token';
 export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
-  signup(newUser: NewUserModel): Observable<any> {
-    return this.http.post(SIGNUP_PATH, newUser);
+  signup(newUser: NewUserModel): Promise<UserModel> {
+    return this.http.post<UserModel>(SIGNUP_PATH, newUser).toPromise();
   }
 
-  login(email: string, password: string): Observable<any> {
-    // Spring Boot returns content-type text.
+  login(email: string, password: string): Promise<string> {
+    // server returns content-type text.
     return this.http
       .post(PATH, { email, password }, { responseType: 'text' })
-      .pipe(
-        tap((token: string) => {
-          localStorage.setItem(TOKEN_STORAGE, token.split(' ')[1]);
-        })
-      );
+      .toPromise()
+      .then((token: string) => {
+        localStorage.setItem(TOKEN_STORAGE, token.split(' ')[1]);
+        return token;
+      });
   }
 
   getToken(): string {

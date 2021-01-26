@@ -1,20 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HarnessLoader } from '@angular/cdk/testing';
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 
 import { SignupComponent } from './signup.component';
 import { AuthService } from './../../services/auth.service';
-import { NewUserModel } from './../../models/new-user.model';
+import { NewUserModel, UserModel } from './../../models';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from '../home/home.component';
 
 const MOCK_USER_ID = 'new-user-id';
 const newUser: NewUserModel = {
@@ -22,13 +18,18 @@ const newUser: NewUserModel = {
   email: 'belcher.louise@hotmail.com',
   password: 'kuchiK0pi!'
 };
+const savedUser: UserModel = {
+  id: MOCK_USER_ID,
+  username: newUser.username,
+  email: newUser.email
+};
 const MOCK_LOGIN_RESPONSE = `${newUser.username} i.ama.jwt`;
 
+jest.mock('@angular/router');
 jest.mock('./../../services/auth.service');
 describe('SignupComponent', () => {
   let component: SignupComponent;
   let fixture: ComponentFixture<SignupComponent>;
-  let loader: HarnessLoader;
   let router: Router;
   let authService: AuthService;
 
@@ -41,29 +42,21 @@ describe('SignupComponent', () => {
         MatCardModule,
         MatFormFieldModule,
         MatInputModule,
-        NoopAnimationsModule,
-        RouterTestingModule.withRoutes([
-          { path: 'home', component: HomeComponent }
-        ])
+        NoopAnimationsModule
       ],
       providers: [Router, AuthService]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    router = TestBed.inject(Router);
+    router = TestBed.get(Router);
     authService = TestBed.get(AuthService);
 
-    // TODO - Mock with jest-marbles
-    // https://github.com/just-jeb/jest-marbles
     router.navigate = jest.fn().mockResolvedValue(true);
-    authService.signup = jest
-      .fn()
-      .mockReturnValue(of({ id: MOCK_USER_ID, ...newUser }));
+    authService.signup = jest.fn().mockResolvedValue(savedUser);
     authService.login = jest.fn().mockResolvedValue(of(MOCK_LOGIN_RESPONSE));
 
     fixture = TestBed.createComponent(SignupComponent);
-    loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -219,14 +212,14 @@ describe('SignupComponent', () => {
     });
   });
 
-  describe.only('submit', () => {
-    it('should create new user and log them in.', () => {
+  describe('submit', () => {
+    it('should create new user and log them in.', async () => {
       component.signupForm.controls.username.setValue(newUser.username);
       component.signupForm.controls.email.setValue(newUser.email);
       component.signupForm.controls.password.setValue(newUser.password);
       component.signupForm.controls.password2.setValue(newUser.password);
 
-      component.submit();
+      await component.submit();
 
       expect(authService.signup).toHaveBeenCalledTimes(1);
       expect(authService.login).toHaveBeenCalledTimes(1);
@@ -237,6 +230,25 @@ describe('SignupComponent', () => {
       );
       expect(router.navigate).toHaveBeenCalledTimes(1);
       expect(router.navigate).toHaveBeenCalledWith(['home']);
+    });
+
+    it('should log an error if signup fails.', async () => {
+      authService.signup = jest
+        .fn()
+        .mockRejectedValueOnce(new Error('mock error message'));
+      console.error = jest.fn();
+
+      component.signupForm.controls.username.setValue(newUser.username);
+      component.signupForm.controls.email.setValue(newUser.email);
+      component.signupForm.controls.password.setValue(newUser.password);
+      component.signupForm.controls.password2.setValue(newUser.password);
+
+      await component.submit();
+
+      expect(authService.signup).toHaveBeenCalledTimes(1);
+      expect(authService.login).toHaveBeenCalledTimes(0);
+      expect(router.navigate).toHaveBeenCalledTimes(0);
+      expect(console.error).toHaveBeenCalledTimes(1);
     });
   });
 });

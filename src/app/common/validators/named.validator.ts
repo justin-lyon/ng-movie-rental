@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-export function NamedPatternValidator(
+export function namedValidator(
   name: string,
   validator: ValidatorFn
 ): ValidatorFn {
