@@ -29,25 +29,3 @@ jobs:
 
       - name: Check Lint && Format
         run: npm run lint:validate
-
-      - name: Jest Tests
-        run: npm test
-
-      - name: Cypress Tests
-        uses: cypress-io/github-action@v2
-        # normally you would write
-        # uses: ./
-        # the parameters below are only necessary
-        # because we are running these examples in a monorepo
-        with:
-          start: npm start
-          env: host=localhost,port=4200
-          wait-on: http://localhost:4200
-          wait-on-timeout: 180
-          browser: chrome
-          headless: true
-          # working-directory: examples/basic
-          # just for full picture after installing Cypress
-          # print information about detected browsers, etc
-          # see https://on.cypress.io/command-line#cypress-info
-          build: npx cypress info
