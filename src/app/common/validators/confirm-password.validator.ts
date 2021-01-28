@@ -1,9 +1,9 @@
 import { FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-export function ConfirmPasswordValidator(
+export const confirmPasswordValidator = (
   controlName: string,
   matchingControlName: string
-): ValidatorFn {
+): ValidatorFn => {
   return (formGroup: FormGroup): ValidationErrors | null => {
     const control = formGroup.controls[controlName];
     const matchingControl = formGroup.controls[matchingControlName];
@@ -21,4 +21,4 @@ export function ConfirmPasswordValidator(
       matchingControl.setErrors(null);
     }
   };
-}
+};

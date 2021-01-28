@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import {
-  ConfirmPasswordValidator,
+  confirmPasswordValidator,
   namedValidator
 } from '../../common/validators';
 import { NewUserModel } from '../../models';
@@ -56,7 +56,7 @@ export class SignupComponent implements OnInit {
         ],
         password2: ['', Validators.required]
       },
-      { validator: ConfirmPasswordValidator('password', 'password2') }
+      { validator: confirmPasswordValidator('password', 'password2') }
     );
   }
 
