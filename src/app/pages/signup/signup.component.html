@@ -13,6 +13,7 @@
           placeHolder="Username... How others will see you."
           formControlName="username"
           required
+          autofocus
         />
         <mat-hint> How others will see you. </mat-hint>
         <mat-error *ngIf="signupForm.controls.username.hasError('required')">
