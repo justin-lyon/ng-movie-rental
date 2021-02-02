@@ -3,9 +3,9 @@ import { NewUserModel, UserModel } from '../models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-const SIGNUP_PATH = 'signup';
-const PATH = 'auth/login';
-const TOKEN_STORAGE = 'token';
+export const SIGNUP_PATH = 'signup';
+export const PATH = 'auth/login';
+export const TOKEN_STORAGE = 'token';
 
 @Injectable({
   providedIn: 'root'

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { TestBed } from '@angular/core/testing';
 
-import { AuthService } from './auth.service';
+import { SIGNUP_PATH, PATH, TOKEN_STORAGE, AuthService } from './auth.service';
 import { of } from 'rxjs';
 
 jest.mock('@angular/router');
@@ -44,7 +44,7 @@ describe('AuthService', () => {
       expect(result).toBe(savedUser);
 
       expect(http.post).toHaveBeenCalledTimes(1);
-      expect(http.post).toHaveBeenCalledWith('signup', newUser);
+      expect(http.post).toHaveBeenCalledWith(SIGNUP_PATH, newUser);
     });
   });
 
@@ -56,12 +56,12 @@ describe('AuthService', () => {
       const { email, password } = newUser;
       const result = await service.login(email, password);
       expect(result).toEqual(textContent);
-      const storedToken = localStorage.getItem('token');
+      const storedToken = localStorage.getItem(TOKEN_STORAGE);
       expect(storedToken).toBe(textContent.split(' ')[1]);
 
       expect(http.post).toHaveBeenCalledTimes(1);
       expect(http.post).toHaveBeenCalledWith(
-        'auth/login',
+        PATH,
         { email, password },
         { responseType: 'text' }
       );
@@ -73,7 +73,7 @@ describe('AuthService', () => {
   describe('getToken', () => {
     it('should retrieve a token from local storage', () => {
       const storedToken = 'ima.bearer.token';
-      localStorage.setItem('token', storedToken);
+      localStorage.setItem(TOKEN_STORAGE, storedToken);
 
       const result = service.getToken();
       expect(result).toEqual(storedToken);
