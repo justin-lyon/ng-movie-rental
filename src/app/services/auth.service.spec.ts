@@ -56,6 +56,8 @@ describe('AuthService', () => {
       const { email, password } = newUser;
       const result = await service.login(email, password);
       expect(result).toEqual(textContent);
+      const storedToken = localStorage.getItem('token');
+      expect(storedToken).toBe(textContent.split(' ')[1]);
 
       expect(http.post).toHaveBeenCalledTimes(1);
       expect(http.post).toHaveBeenCalledWith(
@@ -63,6 +65,8 @@ describe('AuthService', () => {
         { email, password },
         { responseType: 'text' }
       );
+
+      localStorage.clear();
     });
   });
 
