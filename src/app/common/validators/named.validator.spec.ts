@@ -1,4 +1,4 @@
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { namedValidator } from './named.validator';
 
 describe('namedValidator', () => {

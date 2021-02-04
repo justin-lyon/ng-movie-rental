@@ -8,5 +8,6 @@ import { BreakpointObserver } from '@angular/cdk/layout';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavBarComponent {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars-experimental
   constructor(private breakpointObserver: BreakpointObserver) {}
 }
