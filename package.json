@@ -42,7 +42,7 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "codelyzer": "^6.0.0",
-    "cypress": "5.5.0",
+    "cypress": "6.4.0",
     "eslint": "^7.12.1",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-cypress": "^2.11.2",

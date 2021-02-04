@@ -1,19 +1,123 @@
-before(() => {
-  cy.visit('/signup');
-});
+const container = 'div.container';
 
-describe('the signup page', () => {
+const username = 'input[formcontrolname="username"]';
+const email = 'input[formcontrolname="email"]';
+const password = 'input[formcontrolname="password"]';
+const password2 = 'input[formcontrolname="password2"]';
+
+const cancelBtn = 'button:contains("Cancel")';
+const submitBtn = 'button:contains("Shall we?")';
+
+const messages = {
+  required: 'This field is required.',
+  minLength2: 'Minimum length of 2 characters.',
+  maxLength20: 'Maximum length of 20 characters.',
+  email: 'Please enter a valid email.',
+  minLength8: 'Minimum length of 8 characters.',
+  lowercase: 'Password must have at least 1 lowercase letter.',
+  uppercase: 'Password must have at least 1 uppercase letter.',
+  number: 'Password must have at least 1 number.',
+  special: 'Password must have at least 1 special character.',
+  matching: 'Passwords do not match.'
+};
+
+const interceptSignup = () => {
+  cy.intercept('POST', '/signup', { fixture: 'signup.json' });
+  cy.intercept('POST', '/login', { fixture: 'login.txt' });
+};
+
+// Custom Cypress Commands
+const { typeValue, assertMatError } = cy;
+
+context('the signup page', () => {
+  before(() => {
+    cy.visit('/signup');
+  });
+
   it('should display', () => {
     cy.contains(`It'll just take a sec.`);
   });
 
-  it('should have a sidebar and toolbar', () => {
-    cy.get('input[formcontrolname="username"]').should('be.visible');
-    cy.get('input[formcontrolname="email"]').should('be.visible');
-    cy.get('input[formcontrolname="password"]').should('be.visible');
-    cy.get('input[formcontrolname="password2"]').should('be.visible');
+  it('should have four inputs and two buttons', () => {
+    cy.get(container).within(() => {
+      cy.get(username).should('be.visible');
+      cy.get(email).should('be.visible');
+      cy.get(password).should('be.visible');
+      cy.get(password2).should('be.visible');
 
-    cy.get('button').contains('Cancel').should('be.enabled');
-    cy.get('button').contains('Shall we?').should('be.disabled');
+      cy.get(cancelBtn).should('be.enabled');
+      cy.get(submitBtn).should('be.disabled');
+    });
+  });
+
+  it('should validate the form', () => {
+    cy.get(container).within(() => {
+      // Username
+      cy.get(submitBtn).should('be.disabled');
+      cy.get(username).focus().blur();
+      assertMatError(messages.required);
+      typeValue(username, 't');
+      assertMatError(messages.minLength2);
+      typeValue(username, '123456789123456789123456789');
+      assertMatError(messages.maxLength20);
+      typeValue(username, 'turkeylover');
+      cy.get('mat-error').should('not.exist');
+
+      // Email
+      cy.get(submitBtn).should('be.disabled');
+      cy.get(email).focus().blur();
+      assertMatError(messages.required);
+      typeValue(email, 'notanemail');
+      assertMatError(messages.email);
+      typeValue(email, 'bobsburgers@hotmail.com');
+      cy.get('mat-error').should('not.exist');
+
+      // Password
+      cy.get(submitBtn).should('be.disabled');
+      cy.get(password).focus().blur();
+      assertMatError(messages.required);
+      typeValue(password, '1');
+      assertMatError(messages.minLength8);
+      typeValue(password, '12345678');
+      assertMatError(messages.lowercase);
+      typeValue(password, 'abcd1234');
+      assertMatError(messages.uppercase);
+      typeValue(password, 'Abcdefgh');
+      assertMatError(messages.number);
+      typeValue(password, 'Abcd1234');
+      assertMatError(messages.special);
+      typeValue(password, 'Abc1234!');
+      cy.get('mat-error').should('not.exist');
+
+      // Password2
+      cy.get(submitBtn).should('be.disabled');
+      cy.get(password2).focus().blur();
+      assertMatError(messages.required);
+      typeValue(password2, 'not a match');
+      assertMatError(messages.matching);
+      typeValue(password2, 'Abc1234!');
+      cy.get('mat-error').should('not.exist');
+
+      cy.get(submitBtn).should('be.enabled');
+    });
+  });
+
+  it('should navigate to Home on submit', () => {
+    interceptSignup();
+
+    cy.get(container).within(() => {
+      typeValue(username, 'turkeylover');
+      typeValue(email, 'bobsburgers@hotmail.com');
+      typeValue(password, 'N0HumanM3@t');
+      typeValue(password2, 'N0HumanM3@t');
+
+      cy.get(submitBtn).click();
+      cy.url().should('include', '/home');
+    });
+
+    cy.fixture('login.txt').then(data => {
+      const token = data.split(' ')[1];
+      expect(localStorage.getItem('token')).to.eq(token);
+    });
   });
 });
