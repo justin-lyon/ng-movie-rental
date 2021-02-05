@@ -8,15 +8,15 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { NaviComponent } from './navi.component';
+import { NavBarComponent } from './nav-bar.component';
 
-describe('NaviComponent', () => {
-  let component: NaviComponent;
-  let fixture: ComponentFixture<NaviComponent>;
+describe('NavBarComponent', () => {
+  let component: NavBarComponent;
+  let fixture: ComponentFixture<NavBarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NaviComponent],
+      declarations: [NavBarComponent],
 
       imports: [
         NoopAnimationsModule,
@@ -32,13 +32,12 @@ describe('NaviComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NaviComponent);
+    fixture = TestBed.createComponent(NavBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create the navi component', () => {
-    const cmp = fixture.componentInstance;
-    expect(cmp).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 });

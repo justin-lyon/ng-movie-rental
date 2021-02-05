@@ -15,3 +15,16 @@
   top: 0;
   z-index: 1;
 }
+
+span.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+mat-nav-list a {
+  color: inherit;
+}
+/* .login-options {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+} */

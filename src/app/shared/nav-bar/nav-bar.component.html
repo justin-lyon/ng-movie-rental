@@ -29,6 +29,16 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Movie Rental</span>
+      <span class="toolbar-spacer"></span>
+
+      <mat-nav-list fxLayout="row">
+        <a mat-list-item routerLink="login" routerLinkActive="active">
+          Login
+        </a>
+        <a mat-list-item routerLink="signup" routerLinkActive="active">
+          Signup
+        </a>
+      </mat-nav-list>
     </mat-toolbar>
 
     <ng-content></ng-content>

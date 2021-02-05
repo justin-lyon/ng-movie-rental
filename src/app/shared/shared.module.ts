@@ -1,22 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LayoutModule } from '@angular/cdk/layout';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { BrowserModule } from '@angular/platform-browser';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MaterialModule } from '../material.module';
+
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RouterModule } from '@angular/router';
 
-import { MaterialModule } from '../material.module';
-import { NaviComponent } from './navi/navi.component';
+const sharedModules = [
+  BrowserModule,
+  FlexLayoutModule,
+  FormsModule,
+  LayoutModule,
+  MaterialModule,
+  ReactiveFormsModule,
+  RouterModule
+];
 
 @NgModule({
-  declarations: [NaviComponent],
-  exports: [MaterialModule, FlexLayoutModule, LayoutModule, NaviComponent],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    FlexLayoutModule,
-    LayoutModule,
-    RouterModule
-  ]
+  declarations: [NavBarComponent],
+  imports: [CommonModule, ...sharedModules],
+  exports: [NavBarComponent, ...sharedModules]
 })
 export class SharedModule {}

@@ -41,3 +41,11 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('typeValue', (selector, value) => {
+  cy.get(selector).clear().type(value);
+});
+
+Cypress.Commands.add('assertMatError', message => {
+  cy.get(`mat-error:contains("${message}")`).should('exist');
+});

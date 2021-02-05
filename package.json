@@ -6,12 +6,15 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "jest",
-    "test:int": "cypress run --headless --browser chromium --config video=false",
+    "test:all": "npm run lint:validate && npm test && npm run test:int",
+    "test:int": "npm run test:int:chromium && npm run test:int:firefox",
+    "test:int:chromium": "cypress run --headless --browser chromium --config video=false",
+    "test:int:firefox": "cypress run --headless --browser firefox --config video=false",
     "test:watch": "jest -o --watch",
     "test:coverage": "jest --coverage",
     "e2e": "npm run test && npm run test:cypress",
     "lint": "tsc --noEmit && eslint . --ext js,ts --quiet --fix && prettier --write .",
-    "lint:validate": "tsc --noEmit && eslint . --ext js,ts --quiet && prettier --check ."
+    "lint:validate": "tsc --noEmit && eslint ./src --ext js,ts --quiet && prettier --check ."
   },
   "private": true,
   "dependencies": {
@@ -39,7 +42,7 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "codelyzer": "^6.0.0",
-    "cypress": "5.5.0",
+    "cypress": "6.4.0",
     "eslint": "^7.12.1",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-cypress": "^2.11.2",
