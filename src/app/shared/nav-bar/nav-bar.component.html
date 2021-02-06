@@ -8,11 +8,28 @@
   >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/home" routerLinkActive="active"> Home </a>
-      <a mat-list-item routerLink="/account" routerLinkActive="active">
+      <a
+        mat-list-item
+        routerLink="/home"
+        routerLinkActive="active"
+        (click)="drawer.close()"
+      >
+        Home
+      </a>
+      <a
+        mat-list-item
+        routerLink="/account"
+        routerLinkActive="active"
+        (click)="drawer.close()"
+      >
         My Account
       </a>
-      <a mat-list-item routerLink="settings" routerLinkActive="active">
+      <a
+        mat-list-item
+        routerLink="settings"
+        routerLinkActive="active"
+        (click)="drawer.close()"
+      >
         Settings
       </a>
     </mat-nav-list>
