@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { NewUserModel, UserModel } from '../models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -11,7 +10,7 @@ export const TOKEN_STORAGE = 'token';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   signup(newUser: NewUserModel): Promise<UserModel> {
     return this.http.post<UserModel>(SIGNUP_PATH, newUser).toPromise();
@@ -31,7 +30,9 @@ export class AuthService {
   getToken(): string {
     const token = localStorage.getItem(TOKEN_STORAGE);
     if (token) return token;
+  }
 
-    this.router.navigate(['login']);
+  isLoggedIn(): boolean {
+    return !!this.getToken();
   }
 }
