@@ -17,6 +17,7 @@
         Home
       </a>
       <a
+        *ngIf="isLoggedIn"
         mat-list-item
         routerLink="/account"
         routerLinkActive="active"
@@ -25,6 +26,7 @@
         My Account
       </a>
       <a
+        *ngIf="isLoggedIn"
         mat-list-item
         routerLink="settings"
         routerLinkActive="active"
@@ -49,11 +51,29 @@
       <span class="toolbar-spacer"></span>
 
       <mat-nav-list fxLayout="row">
-        <a mat-list-item routerLink="login" routerLinkActive="active">
+        <a
+          *ngIf="!isLoggedIn"
+          mat-list-item
+          routerLink="login"
+          routerLinkActive="active"
+        >
           Login
         </a>
-        <a mat-list-item routerLink="signup" routerLinkActive="active">
+        <a
+          *ngIf="!isLoggedIn"
+          mat-list-item
+          routerLink="signup"
+          routerLinkActive="active"
+        >
           Signup
+        </a>
+        <a
+          *ngIf="isLoggedIn"
+          mat-list-item
+          routerLink="login"
+          routerLinkActive="active"
+        >
+          Logout
         </a>
       </mat-nav-list>
     </mat-toolbar>

@@ -1,6 +1,7 @@
 import { NewUserModel, UserModel } from '../models';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 
 export const SIGNUP_PATH = 'signup';
 export const PATH = 'auth/login';
@@ -10,7 +11,13 @@ export const TOKEN_STORAGE = 'token';
   providedIn: 'root'
 })
 export class AuthService {
+  private state = new BehaviorSubject<boolean>(false);
+
   constructor(private http: HttpClient) {}
+
+  observe(): Observable<boolean> {
+    return this.state.asObservable();
+  }
 
   signup(newUser: NewUserModel): Promise<UserModel> {
     return this.http.post<UserModel>(SIGNUP_PATH, newUser).toPromise();
@@ -23,6 +30,7 @@ export class AuthService {
       .toPromise()
       .then((token: string) => {
         localStorage.setItem(TOKEN_STORAGE, token.split(' ')[1]);
+        this.state.next(true);
         return token;
       });
   }
@@ -33,6 +41,8 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    const isLoggedIn = !!this.getToken();
+    this.state.next(isLoggedIn);
+    return isLoggedIn;
   }
 }
