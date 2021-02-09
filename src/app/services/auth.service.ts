@@ -23,15 +23,13 @@ export class AuthService {
     return this.http.post<UserModel>(SIGNUP_PATH, newUser).toPromise();
   }
 
-  login(email: string, password: string): Promise<string> {
+  login(email: string, password: string): Promise<void> {
     // server returns content-type text.
     return this.http
       .post(PATH, { email, password }, { responseType: 'text' })
       .toPromise()
-      .then((token: string) => {
-        localStorage.setItem(TOKEN_STORAGE, token.split(' ')[1]);
-        this.state.next(true);
-        return token;
+      .then((data: string) => {
+        this.setToken(data.split(' ')[1]);
       });
   }
 
@@ -40,14 +38,19 @@ export class AuthService {
     this.state.next(false);
   }
 
-  getToken(): string {
-    const token = localStorage.getItem(TOKEN_STORAGE);
-    if (token) return token;
-  }
-
   isLoggedIn(): boolean {
     const isLoggedIn = !!this.getToken();
     this.state.next(isLoggedIn);
     return isLoggedIn;
+  }
+
+  private getToken(): string {
+    const token = localStorage.getItem(TOKEN_STORAGE);
+    if (token) return token;
+  }
+
+  private setToken(token: string): void {
+    localStorage.setItem(TOKEN_STORAGE, token);
+    this.state.next(true);
   }
 }
