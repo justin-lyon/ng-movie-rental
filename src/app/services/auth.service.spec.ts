@@ -33,6 +33,16 @@ describe('AuthService', () => {
     expect(service).toBeTruthy();
   });
 
+  describe('observe', () => {
+    it('should provide an observable', () => {
+      const sub = service.observe().subscribe(data => {
+        expect(data).toBeFalsy();
+      });
+      expect(sub).toBeDefined();
+      sub.unsubscribe();
+    });
+  });
+
   describe('signup', () => {
     it('should POST to /signup', async () => {
       const savedUser = { id: '1', ...newUser };
@@ -49,13 +59,13 @@ describe('AuthService', () => {
   });
 
   describe('login', () => {
-    it('should POST to /auth/login', async () => {
+    it('should POST to /auth/login and broadcast', async () => {
       const textContent = 'username bearer.token.stuff';
       http.post = jest.fn().mockReturnValue(of(textContent));
 
       const { email, password } = newUser;
       const result = await service.login(email, password);
-      expect(result).toEqual(textContent);
+      expect(result).toEqual(undefined);
       const storedToken = localStorage.getItem(TOKEN_STORAGE);
       expect(storedToken).toBe(textContent.split(' ')[1]);
 
@@ -70,22 +80,15 @@ describe('AuthService', () => {
     });
   });
 
-  describe('getToken', () => {
-    it('should retrieve a token from local storage', () => {
-      const storedToken = 'ima.bearer.token';
-      localStorage.setItem(TOKEN_STORAGE, storedToken);
-
-      const result = service.getToken();
-      expect(result).toEqual(storedToken);
-      expect(router.navigate).toHaveBeenCalledTimes(0);
-      localStorage.clear();
+  describe('logout', () => {
+    it('should clear token and broadcast', () => {
+      expect(true).toBeFalsy();
     });
+  });
 
-    it('should navigate to login when token is not in storage', () => {
-      const result = service.getToken();
-      expect(result).toBeUndefined();
-      expect(router.navigate).toHaveBeenCalledTimes(1);
-      expect(router.navigate).toHaveBeenCalledWith(['login']);
+  describe('isLoggedIn', () => {
+    it('should check token and broadcast', () => {
+      expect(true).toBeFalsy();
     });
   });
 });
