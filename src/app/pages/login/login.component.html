@@ -15,7 +15,9 @@
           required
           autofocus
         />
-        <mat-hint> No spam. Scounts honor. </mat-hint>
+        <mat-error *ngIf="formGroup.controls.email.hasError('required')">
+          This field is required.
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="standard">
@@ -27,11 +29,24 @@
           formControlName="password"
           required
         />
+        <mat-error *ngIf="formGroup.controls.password.hasError('required')">
+          This field is required.
+        </mat-error>
       </mat-form-field>
+      <mat-error *ngIf="formGroup.hasError('invalidUsernameOrPassword')">
+        Invalid username or password.
+      </mat-error>
     </mat-card-content>
     <mat-card-actions>
       <button mat-stroked-button color="basic">Cancel</button>
-      <button disabled mat-raised-button color="primary">Login</button>
+      <button
+        [disabled]="formGroup.invalid"
+        (click)="login()"
+        mat-raised-button
+        color="primary"
+      >
+        Login
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>

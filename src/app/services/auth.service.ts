@@ -1,7 +1,7 @@
 import { NewUserModel, UserModel } from '../models';
 import { HttpClient } from '@angular/common/http';
-import { Injectable, EventEmitter } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export const SIGNUP_PATH = 'signup';
 export const PATH = 'auth/login';
