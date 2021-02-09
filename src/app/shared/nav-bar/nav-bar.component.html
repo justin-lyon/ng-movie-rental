@@ -69,6 +69,7 @@
         </a>
         <a
           *ngIf="isLoggedIn"
+          (click)="authService.logout()"
           mat-list-item
           routerLink="login"
           routerLinkActive="active"

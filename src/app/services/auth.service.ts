@@ -11,7 +11,7 @@ export const TOKEN_STORAGE = 'token';
   providedIn: 'root'
 })
 export class AuthService {
-  private state = new BehaviorSubject<boolean>(false);
+  private state = new BehaviorSubject<boolean>(!!this.getToken());
 
   constructor(private http: HttpClient) {}
 
@@ -33,6 +33,11 @@ export class AuthService {
         this.state.next(true);
         return token;
       });
+  }
+
+  logout(): void {
+    localStorage.removeItem(TOKEN_STORAGE);
+    this.state.next(false);
   }
 
   getToken(): string {
