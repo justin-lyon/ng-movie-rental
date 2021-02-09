@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars-experimental */
 import { AuthService } from './../services/auth.service';
 import { Injectable } from '@angular/core';
 import {

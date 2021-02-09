@@ -18,8 +18,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
   $subs: Subscription;
   isLoggedIn = false;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars-experimental
   constructor(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars-experimental
     private breakpointObserver: BreakpointObserver,
     private authService: AuthService
   ) {}
@@ -32,5 +32,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.$subs.unsubscribe();
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }

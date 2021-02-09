@@ -7,3 +7,7 @@ package-lock.json
 .vscode
 .github
 coverage
+
+cypress/plugins/
+cypress/support/
+jest.config.js
