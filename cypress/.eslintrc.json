@@ -1,0 +1,9 @@
+{
+  "plugins": ["mocha"],
+  "extends": [
+    "plugin:mocha/recommended"
+  ],
+  "rules": {
+    "mocha/no-mocha-arrows": "none"
+  }
+}

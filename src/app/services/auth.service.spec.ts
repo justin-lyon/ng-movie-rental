@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-import { TestBed } from '@angular/core/testing';
+import { fakeAsync, flush, TestBed } from '@angular/core/testing';
 
 import { SIGNUP_PATH, PATH, TOKEN_STORAGE, AuthService } from './auth.service';
 import { of } from 'rxjs';
@@ -81,14 +81,49 @@ describe('AuthService', () => {
   });
 
   describe('logout', () => {
-    it('should clear token and broadcast', () => {
-      expect(true).toBeFalsy();
-    });
+    it('should clear token and broadcast', fakeAsync(() => {
+      const token = 'the-key-master';
+      localStorage.setItem(TOKEN_STORAGE, token);
+
+      service.logout();
+      flush();
+
+      const $sub = service.observe().subscribe(data => {
+        expect(data).toBe(!!localStorage.getItem(TOKEN_STORAGE));
+      });
+
+      expect(localStorage.getItem(TOKEN_STORAGE)).toBeNull();
+
+      $sub.unsubscribe();
+    }));
   });
 
   describe('isLoggedIn', () => {
-    it('should check token and broadcast', () => {
-      expect(true).toBeFalsy();
-    });
+    it('should broadcast TRUE when token is in localStorage', fakeAsync(() => {
+      const token = 'the-key-master';
+      localStorage.setItem(TOKEN_STORAGE, token);
+
+      service.isLoggedIn();
+      flush();
+
+      const $sub = service.observe().subscribe(data => {
+        expect(data).toBe(true);
+      });
+
+      $sub.unsubscribe();
+    }));
+
+    it('should broadcast FALSE when NO token in localStorage', fakeAsync(() => {
+      localStorage.clear();
+
+      service.isLoggedIn();
+      flush();
+
+      const $sub = service.observe().subscribe(data => {
+        expect(data).toBe(false);
+      });
+
+      $sub.unsubscribe();
+    }));
   });
 });
