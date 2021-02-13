@@ -2,5 +2,8 @@
   "plugins": ["jest"],
   "extends": [
     "plugin:jest/recommended"
-  ]
+  ],
+  "rules": {
+    "jest/no-done-callback": "off"
+  }
 }
