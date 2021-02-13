@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import { fakeAsync, flush, TestBed } from '@angular/core/testing';
@@ -6,7 +5,6 @@ import { fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { SIGNUP_PATH, PATH, TOKEN_STORAGE, AuthService } from './auth.service';
 import { of } from 'rxjs';
 
-jest.mock('@angular/router');
 jest.mock('@angular/common/http');
 describe('AuthService', () => {
   const newUser = {
@@ -15,18 +13,15 @@ describe('AuthService', () => {
     password: '123sesamE!'
   };
   let http: HttpClient;
-  let router: Router;
   let service: AuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [HttpClient, Router]
+      providers: [HttpClient]
     });
 
     http = TestBed.inject(HttpClient);
-    router = TestBed.inject(Router);
     service = TestBed.inject(AuthService);
-    router.navigate = jest.fn().mockResolvedValue(true);
   });
 
   it('should be created', () => {
@@ -45,8 +40,8 @@ describe('AuthService', () => {
 
   describe('signup', () => {
     it('should POST to /signup', async () => {
-      const savedUser = { id: '1', ...newUser };
-      delete savedUser.password;
+      const { password, ...user } = newUser;
+      const savedUser = { id: '1', ...user };
 
       http.post = jest.fn().mockReturnValue(of(savedUser));
 
