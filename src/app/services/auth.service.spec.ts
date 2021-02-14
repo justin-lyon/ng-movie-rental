@@ -121,4 +121,21 @@ describe('AuthService', () => {
       $sub.unsubscribe();
     }));
   });
+
+  describe('getToken', () => {
+    it(`should return the token if it's in localStorage`, () => {
+      const token = 'kuchi-kopi-token';
+      localStorage.setItem(TOKEN_STORAGE, token);
+
+      const result = service.getToken();
+      expect(result).toBe(token);
+
+      localStorage.clear();
+    });
+
+    it(`should return undefined if it's NOT in localStorage`, () => {
+      const result = service.getToken();
+      expect(result).toBeUndefined();
+    });
+  });
 });

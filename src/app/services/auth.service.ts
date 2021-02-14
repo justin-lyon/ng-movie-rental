@@ -44,7 +44,7 @@ export class AuthService {
     return isLoggedIn;
   }
 
-  private getToken(): string {
+  getToken(): string {
     const token = localStorage.getItem(TOKEN_STORAGE);
     if (token) return token;
   }
