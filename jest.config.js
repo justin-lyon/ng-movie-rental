@@ -7,7 +7,8 @@ module.exports = {
     '/src/polyfills.ts',
     '/models/',
     '/environments/',
-    '/*.module.ts'
+    '/*.module.ts',
+    '/index.ts'
   ],
   testMatch: ['<rootDir>/src/**/*.spec.ts']
 };
