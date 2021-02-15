@@ -49,3 +49,11 @@ Cypress.Commands.add('typeValue', (selector, value) => {
 Cypress.Commands.add('assertMatError', message => {
   cy.get(`mat-error:contains("${message}")`).should('exist');
 });
+
+Cypress.Commands.add('login', () => {
+  localStorage.setItem('token', 'this-is-a-bearer-token');
+});
+
+Cypress.Commands.add('logout', () => {
+  localStorage.clear();
+});

@@ -1,6 +1,8 @@
 context('the home page', () => {
+  const { login } = cy;
   before(() => {
-    cy.visit('/');
+    login();
+    cy.visit('/home');
   });
 
   it('should display', () => {
