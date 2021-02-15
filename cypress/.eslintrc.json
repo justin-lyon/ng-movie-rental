@@ -1,9 +1,10 @@
 {
   "plugins": ["mocha"],
   "extends": [
-    "plugin:mocha/recommended"
+    "plugin:mocha/recommended",
+    "plugin:cypress/recommended"
   ],
   "rules": {
-    "mocha/no-mocha-arrows": "none"
+    "mocha/no-mocha-arrows": "off"
   }
 }
