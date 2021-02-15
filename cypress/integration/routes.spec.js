@@ -3,7 +3,7 @@ context('the router', () => {
   describe('the public routes', () => {
     beforeEach(() => {
       logout();
-    })
+    });
 
     it('should route from forward slash to /home', () => {
       cy.visit('/');
@@ -31,13 +31,13 @@ context('the router', () => {
       logout();
       cy.visit('/account');
       cy.url().should('include', '/login');
-    })
+    });
 
     it('should re-route /settings to /login if not logged in', () => {
       logout();
       cy.visit('/settings');
       cy.url().should('include', '/login');
-    })
+    });
 
     it('should route to /account', () => {
       cy.visit('/account');

@@ -22,4 +22,4 @@ beforeEach(() => {
 
 afterEach(() => {
   cy.logout();
-})
+});
