@@ -90,9 +90,9 @@
       <button mat-stroked-button color="basic">Cancel</button>
       <button
         [disabled]="signupForm.invalid"
+        (click)="submit()"
         mat-raised-button
         color="primary"
-        (click)="submit()"
       >
         Shall we?
       </button>

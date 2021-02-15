@@ -70,7 +70,7 @@ describe('SignupComponent', () => {
       component.initForm();
     });
 
-    it('should create a formgroup with inputs', () => {
+    it('should create a formgroup with controls', () => {
       component.ngOnInit();
       expect(component.signupForm).toBeDefined();
       const {

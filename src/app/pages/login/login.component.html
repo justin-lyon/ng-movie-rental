@@ -1,1 +1,55 @@
-<p>login works!</p>
+<div class="container" fxLayout fxLayoutAlign="center">
+  <mat-card [formGroup]="formGroup" fxFlex.xs="1 1 100" fxFlex.gt-xs="1 1 40">
+    <mat-card-header>
+      <mat-card-title> Login </mat-card-title>
+      <mat-card-subtitle> Welcome back! </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content fxLayout="column">
+      <mat-form-field appearance="standard">
+        <mat-label> Email </mat-label>
+        <input
+          type="text"
+          matInput
+          placeHolder="Email"
+          formControlName="email"
+          required
+          autofocus
+        />
+        <mat-error *ngIf="formGroup.controls.email.hasError('required')">
+          This field is required.
+        </mat-error>
+        <mat-error *ngIf="formGroup.controls.email.hasError('email')">
+          Please enter a valid email address.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <mat-label> Password </mat-label>
+        <input
+          type="password"
+          matInput
+          placeHolder="Password"
+          formControlName="password"
+          required
+        />
+        <mat-error *ngIf="formGroup.controls.password.hasError('required')">
+          This field is required.
+        </mat-error>
+      </mat-form-field>
+      <mat-error *ngIf="formGroup.hasError('invalidUsernameOrPassword')">
+        Invalid username or password.
+      </mat-error>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-stroked-button color="basic">Cancel</button>
+      <button
+        [disabled]="formGroup.invalid"
+        (click)="login()"
+        mat-raised-button
+        color="primary"
+      >
+        Login
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

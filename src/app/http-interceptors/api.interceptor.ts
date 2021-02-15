@@ -8,7 +8,7 @@ import {
 
 import { Observable } from 'rxjs';
 
-const BASE_URL = 'http://localhost:9191';
+export const BASE_URL = 'http://localhost:9191';
 
 /** Pass untouched request through to the next request handler. */
 @Injectable()
