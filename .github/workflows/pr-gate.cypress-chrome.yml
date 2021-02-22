@@ -5,7 +5,7 @@ name: PR Gate - Cypress Chrome
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   pull-request-gate:
