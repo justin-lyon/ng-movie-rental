@@ -5,7 +5,7 @@ name: PR Gate - Lint
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   pull-request-gate:
