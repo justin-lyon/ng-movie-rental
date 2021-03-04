@@ -9,6 +9,7 @@ import { MaterialModule } from '../material.module';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RouterModule } from '@angular/router';
+import { MoviesGridComponent } from './movies-grid/movies-grid.component';
 
 const sharedModules = [
   BrowserModule,
@@ -21,8 +22,8 @@ const sharedModules = [
 ];
 
 @NgModule({
-  declarations: [NavBarComponent],
+  declarations: [NavBarComponent, MoviesGridComponent],
   imports: [CommonModule, ...sharedModules],
-  exports: [NavBarComponent, ...sharedModules]
+  exports: [NavBarComponent, ...sharedModules, MoviesGridComponent]
 })
 export class SharedModule {}

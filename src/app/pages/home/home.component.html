@@ -1,1 +1,6 @@
 <h1>welcome home</h1>
+<div>
+  <input [formControl]="searchInput" type="text" />
+</div>
+<button (click)="onClickSearch()">Search</button>
+<app-movies-grid></app-movies-grid>
