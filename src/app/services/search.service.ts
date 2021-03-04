@@ -1,3 +1,4 @@
+import { MovieView } from './../models/movie.view';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 

@@ -1,4 +1,4 @@
-export class NewUserModel {
+export class MovieView {
   id: number;
   title: string;
   originalTitle: string;
