@@ -1,4 +1,4 @@
-import { MovieView } from './../models/movie.view';
+import { MovieView } from '../models/movie.view';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -7,7 +7,7 @@ const PATH = 'movies';
 @Injectable({
   providedIn: 'root'
 })
-export class SearchService {
+export class MovieService {
   constructor(private http: HttpClient) {}
 
   search(term: string): Promise<MovieView[]> {
@@ -17,5 +17,9 @@ export class SearchService {
     return this.http
       .get<MovieView[]>(PATH, { params })
       .toPromise();
+  }
+
+  getPopularMovies(): Promise<MovieView[]> {
+    return this.http.get<MovieView[]>(PATH).toPromise();
   }
 }

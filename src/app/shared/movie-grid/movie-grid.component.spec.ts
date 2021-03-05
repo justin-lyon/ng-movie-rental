@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MoviesGridComponent } from './movies-grid.component';
+import { MovieGridComponent } from './movie-grid.component';
 
 describe('MoviesGridComponent', () => {
   let component: MoviesGridComponent;
@@ -8,9 +8,8 @@ describe('MoviesGridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MoviesGridComponent ]
-    })
-    .compileComponents();
+      declarations: [MovieGridComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
