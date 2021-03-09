@@ -1,18 +1,5 @@
 <mat-grid-list cols="4" rowHeight="2:3">
   <mat-grid-tile *ngFor="let movie of movies">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>{{ movie.title }}</mat-card-title>
-        <mat-card-subtitle> {{ movie.releaseDate }} </mat-card-subtitle>
-      </mat-card-header>
-      <img [src]="movie.posterPath | tmdbImg: 185" alt="" />
-      <mat-card-content>
-        <p>{{ movie.overview }}</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>More</button>
-        <button mat-button>Rent</button>
-      </mat-card-actions>
-    </mat-card>
+    <app-movie-card [movie]="movie"></app-movie-card>
   </mat-grid-tile>
 </mat-grid-list>

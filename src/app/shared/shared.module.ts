@@ -11,6 +11,7 @@ import { PipesModule } from './../pipes/pipes.module';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MovieGridComponent } from './movie-grid/movie-grid.component';
+import { MovieCardComponent } from './movie-card/movie-card.component';
 
 const sharedModules = [
   BrowserModule,
@@ -24,7 +25,7 @@ const sharedModules = [
 ];
 
 @NgModule({
-  declarations: [NavBarComponent, MovieGridComponent],
+  declarations: [NavBarComponent, MovieGridComponent, MovieCardComponent],
   imports: [CommonModule, ...sharedModules],
   exports: [NavBarComponent, ...sharedModules, MovieGridComponent]
 })
