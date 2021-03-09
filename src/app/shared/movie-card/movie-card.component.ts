@@ -1,3 +1,4 @@
+import { getImgUrl } from './../../common/utils';
 import { MovieView } from './../../models/movie.view';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -13,4 +14,12 @@ export class MovieCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  get backdropImg(): string {
+    return `linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url(${getImgUrl(this.movie.backdropPath, 300)})`;
+  }
 }

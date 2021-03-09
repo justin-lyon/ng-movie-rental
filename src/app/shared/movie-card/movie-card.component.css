@@ -1,0 +1,36 @@
+article.card {
+  background-position: top;
+  color: #fff;
+  padding: 1rem 2rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+}
+
+h3.title {
+  margin: 0 0;
+  width: 30ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div.header {
+  margin-bottom: 1rem;
+}
+
+div.content {
+  width: 50ch;
+  --lh: 1.2rem;
+  --max-lines: 3;
+
+  /**Major Properties**/
+  overflow: hidden;
+  line-height: var(--lh);
+  height: calc(var(--lh) * var(--max-lines));
+  -webkit-box-orient: vertical;
+  display: block;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: var(--max-lines);
+}

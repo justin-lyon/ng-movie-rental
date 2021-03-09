@@ -1,5 +1,9 @@
-<mat-grid-list cols="4" rowHeight="2:3">
-  <mat-grid-tile *ngFor="let movie of movies">
+<!-- <mat-grid-list cols="4" rowHeight="2:3">
+  <mat-grid-tile *ngFor="let movie of movies"> </mat-grid-tile>
+</mat-grid-list> -->
+
+<section class="grid">
+  <div class="cell" *ngFor="let movie of movies">
     <app-movie-card [movie]="movie"></app-movie-card>
-  </mat-grid-tile>
-</mat-grid-list>
+  </div>
+</section>
