@@ -10,6 +10,8 @@ import { MovieView } from '../../models';
 export class HomeComponent implements OnInit {
   searchInput = new FormControl('');
   movies: MovieView[];
+  title = 'Popular';
+  subtitle = 'Recently trending movies';
 
   constructor(private movieService: MovieService) {}
 

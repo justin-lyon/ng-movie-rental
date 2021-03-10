@@ -1,8 +1,9 @@
 .grid {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .cell {
-  margin: 0.5rem auto;
+  margin-bottom: 1rem;
 }

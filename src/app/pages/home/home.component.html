@@ -1,6 +1,5 @@
-<h1>welcome home</h1>
-<div>
-  <input [formControl]="searchInput" type="text" />
+<div class="header">
+  <h1>{{ title }}</h1>
+  <small> {{ subtitle }} </small>
 </div>
-<button (click)="onClickSearch()">Search</button>
 <app-movie-grid [movies]="movies"></app-movie-grid>
