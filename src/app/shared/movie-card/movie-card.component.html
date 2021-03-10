@@ -1,4 +1,8 @@
-<article class="card" [ngStyle]="{ 'background-image': backdropImg }">
+<article
+  (click)="goToDetail()"
+  class="card"
+  [ngStyle]="{ 'background-image': backdropImg }"
+>
   <div class="header">
     <h3 class="title">{{ movie.title }}</h3>
     <small class="subtitle"> {{ movie.releaseDate | date }} </small>

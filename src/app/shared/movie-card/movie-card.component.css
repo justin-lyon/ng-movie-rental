@@ -1,7 +1,8 @@
 article.card {
+  cursor: pointer;
   background-position: top;
   color: #fff;
-  padding: 1rem 2rem;
+  padding: 1rem;
   border: 1px solid black;
   border-radius: 1rem;
 }
