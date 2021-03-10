@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { AuthService } from './../../services/auth.service';
 import {
   Component,
@@ -17,6 +18,8 @@ import { Subscription } from 'rxjs';
 export class NavBarComponent implements OnInit, OnDestroy {
   $subs: Subscription;
   isLoggedIn = false;
+
+  searchInput = new FormControl();
 
   constructor(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars-experimental

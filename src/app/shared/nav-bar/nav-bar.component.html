@@ -48,6 +48,17 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Movie Rental</span>
+      <span class="search-box">
+        <input
+          matInput
+          type="text"
+          [formControl]="searchInput"
+          placeholder="Search..."
+        />
+        <button>
+          <mat-icon aria-label="Search movies.">search</mat-icon>
+        </button>
+      </span>
       <span class="toolbar-spacer"></span>
 
       <mat-nav-list fxLayout="row">
