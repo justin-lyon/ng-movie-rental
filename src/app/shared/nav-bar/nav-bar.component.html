@@ -50,12 +50,12 @@
       <span>Movie Rental</span>
       <span class="search-box">
         <input
-          matInput
           type="text"
           [formControl]="searchInput"
+          (keyup)="handleKeyup($event)"
           placeholder="Search..."
         />
-        <button>
+        <button (click)="search()">
           <mat-icon aria-label="Search movies.">search</mat-icon>
         </button>
       </span>

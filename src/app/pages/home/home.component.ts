@@ -1,7 +1,10 @@
-import { MovieService } from '../../services/movie.service';
+import { ActivatedRoute, Data, Params } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+
+import { MovieService } from '../../services/movie.service';
 import { MovieView } from '../../models';
+import { toTitleCase } from './../../common/utils';
 
 @Component({
   templateUrl: './home.component.html',
@@ -13,33 +16,44 @@ export class HomeComponent implements OnInit {
   title = 'Popular';
   subtitle = 'Recently trending movies';
 
-  constructor(private movieService: MovieService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private movieService: MovieService
+  ) {}
 
   ngOnInit(): void {
-    this.movieService
+    this.route.queryParams.subscribe((queryParams: Params) => {
+      const { term } = queryParams;
+      if (term) {
+        return this.fetchSearchMovies(term);
+      }
+      return this.fetchPopularMovies();
+    });
+  }
+
+  fetchPopularMovies(): Promise<void> {
+    return this.movieService
       .getPopularMovies()
       .then(movies => {
         this.movies = movies;
-        console.log('popular', movies);
+        this.title = 'Popular';
+        this.subtitle = 'Recently trending movies';
       })
       .catch(error => {
         console.error('error getting popular movies.', error);
       });
   }
 
-  onClickSearch(): void {
-    const term = this.searchInput.value;
-    const isBreak = !term || term.length < 3;
-    if (isBreak) return;
-
-    this.movieService
-      .search(this.searchInput.value)
+  fetchSearchMovies(term: string): Promise<void> {
+    return this.movieService
+      .search(term)
       .then(movies => {
         this.movies = movies;
-        console.log('movies', movies);
+        this.title = 'Search';
+        this.subtitle = `"${toTitleCase(term)}"`;
       })
       .catch(error => {
-        console.error('error searching movies', error);
+        console.error(`error searching movies for ${term}`, error);
       });
   }
 }

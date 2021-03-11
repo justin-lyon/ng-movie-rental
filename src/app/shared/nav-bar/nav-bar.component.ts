@@ -1,3 +1,4 @@
+import { SearchService } from './../../services/search.service';
 import { FormControl } from '@angular/forms';
 import { AuthService } from './../../services/auth.service';
 import {
@@ -24,7 +25,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
   constructor(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars-experimental
     private breakpointObserver: BreakpointObserver,
-    private authService: AuthService
+    private authService: AuthService,
+    private searchService: SearchService
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +37,22 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.$subs.unsubscribe();
+  }
+
+  handleKeyup({ keyCode }): void {
+    keyCode;
+    if (keyCode === 13) {
+      this.search();
+    }
+  }
+
+  search() {
+    const term = this.searchInput.value.toLowerCase();
+    const aintEnough = !term || term.length < 3;
+    if (aintEnough) return;
+
+    this.searchService.search(term);
+    this.searchInput.setValue('');
   }
 
   logout(): void {
