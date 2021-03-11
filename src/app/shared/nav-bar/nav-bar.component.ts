@@ -40,7 +40,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   handleKeyup({ keyCode }): void {
-    keyCode;
     if (keyCode === 13) {
       this.search();
     }
