@@ -1,4 +1,3 @@
-import { toTitleCase } from './../../common/utils/to-title-case';
 import { MovieView } from './../../models/movie.view';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';

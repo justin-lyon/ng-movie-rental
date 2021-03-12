@@ -26,8 +26,18 @@ const sharedModules = [
 ];
 
 @NgModule({
-  declarations: [NavBarComponent, MovieGridComponent, MovieCardComponent, HeaderComponent],
+  declarations: [
+    NavBarComponent,
+    MovieGridComponent,
+    MovieCardComponent,
+    HeaderComponent
+  ],
   imports: [CommonModule, ...sharedModules],
-  exports: [NavBarComponent, ...sharedModules, MovieGridComponent, HeaderComponent]
+  exports: [
+    NavBarComponent,
+    ...sharedModules,
+    MovieGridComponent,
+    HeaderComponent
+  ]
 })
 export class SharedModule {}

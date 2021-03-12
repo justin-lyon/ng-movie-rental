@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   constructor(private movieService: MovieService) {}
 
   ngOnInit(): void {
-    return this.fetchPopularMovies();
+    this.fetchPopularMovies();
   }
 
   fetchPopularMovies(): Promise<void> {

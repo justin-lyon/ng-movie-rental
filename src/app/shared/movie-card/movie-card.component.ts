@@ -14,7 +14,9 @@ export class MovieCardComponent implements OnInit {
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.router.navigate;
+  }
 
   get backdropImg(): string {
     return `linear-gradient(

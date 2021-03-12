@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MovieGridComponent } from './movie-grid.component';
 
-describe('MoviesGridComponent', () => {
-  let component: MoviesGridComponent;
-  let fixture: ComponentFixture<MoviesGridComponent>;
+describe('MovieGridComponent', () => {
+  let component: MovieGridComponent;
+  let fixture: ComponentFixture<MovieGridComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -13,7 +13,7 @@ describe('MoviesGridComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MoviesGridComponent);
+    fixture = TestBed.createComponent(MovieGridComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

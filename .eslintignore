@@ -11,3 +11,4 @@ coverage
 cypress/plugins/
 cypress/support/
 jest.config.js
+jest.base.setup.ts
