@@ -8,7 +8,7 @@ export class SearchService {
   constructor(private router: Router) {}
 
   search(term: string): void {
-    this.router.navigate(['home'], {
+    this.router.navigate(['search'], {
       queryParams: { term }
     });
   }

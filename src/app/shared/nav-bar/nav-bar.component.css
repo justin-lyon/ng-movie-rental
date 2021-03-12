@@ -24,6 +24,10 @@ mat-nav-list a {
   color: inherit;
 }
 
+.title {
+  cursor: pointer;
+}
+
 .search-box {
   display: flex;
   justify-content: space-evenly;
