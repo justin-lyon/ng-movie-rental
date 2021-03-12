@@ -35,7 +35,7 @@ export class SearchComponent implements OnInit {
       .search(term)
       .then(movies => {
         this.movies = movies;
-        this.subtitle = `"${toTitleCase(term)}"`;
+        this.subtitle = term;
       })
       .catch(error => {
         console.error(`error searching movies for ${term}`, error);
