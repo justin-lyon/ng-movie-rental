@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule, BreakpointObserver } from '@angular/cdk/layout';
 import {
   async,
@@ -15,13 +16,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AuthService } from './../../services/auth.service';
+import { SearchService } from './../../services/search.service';
 
 import { NavBarComponent } from './nav-bar.component';
 import { of } from 'rxjs';
 
 jest.mock('./../../services/auth.service');
+jest.mock('./../../services/search.service');
 describe('NavBarComponent', () => {
   let authService: AuthService;
+  let searchService: SearchService;
+
   let component: NavBarComponent;
   let fixture: ComponentFixture<NavBarComponent>;
 
@@ -37,14 +42,18 @@ describe('NavBarComponent', () => {
         MatListModule,
         MatSidenavModule,
         MatToolbarModule,
-        RouterTestingModule
+        RouterTestingModule,
+        FormsModule,
+        ReactiveFormsModule
       ],
-      providers: [AuthService, BreakpointObserver]
+      providers: [AuthService, SearchService, BreakpointObserver]
     }).compileComponents();
   }));
 
   beforeEach(() => {
     authService = TestBed.inject(AuthService);
+    searchService = TestBed.inject(SearchService);
+    searchService.search = jest.fn().mockResolvedValue(true);
 
     authService.observe = jest.fn().mockReturnValue(of(true));
     authService.logout = jest.fn();
@@ -82,6 +91,59 @@ describe('NavBarComponent', () => {
     it('should should invoke authservice.logout', () => {
       component.logout();
       expect(authService.logout).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('handleKeyup', () => {
+    beforeEach(() => {
+      component.search = jest.fn();
+    });
+
+    it('should invoke search if {enter} key', () => {
+      const keyCode = 13;
+
+      component.handleKeyup({ keyCode });
+
+      expect(component.search).toHaveBeenCalledTimes(1);
+    });
+
+    it('should do nothing when NOT {enter} key', () => {
+      const keyCode = 1;
+
+      component.handleKeyup({ keyCode });
+
+      expect(component.search).toHaveBeenCalledTimes(0);
+    });
+  });
+
+  describe('search', () => {
+    it('should escape if term is falsy', () => {
+      component.searchInput.setValue(null);
+      const result = component.search();
+
+      expect(result).toBeUndefined();
+      expect(searchService.search).toHaveBeenCalledTimes(0);
+      expect(component.searchInput.value).toBe(null);
+    });
+
+    it('should escape if term length is less than three', () => {
+      const term = 'go';
+      component.searchInput.setValue(term);
+      const result = component.search();
+
+      expect(result).toBeUndefined();
+      expect(searchService.search).toHaveBeenCalledTimes(0);
+      expect(component.searchInput.value).toBe(term);
+    });
+
+    it('should invoke service and reset the form on search', () => {
+      const term = 'goo';
+      component.searchInput.setValue(term);
+      const result = component.search();
+
+      expect(result).toBeUndefined();
+      expect(searchService.search).toHaveBeenCalledTimes(1);
+      expect(component.searchInput.value).toBe('');
     });
   });
 });

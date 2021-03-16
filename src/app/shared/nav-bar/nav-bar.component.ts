@@ -46,11 +46,11 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   search() {
-    const term = this.searchInput.value.toLowerCase();
+    const term = this.searchInput.value;
     const aintEnough = !term || term.length < 3;
     if (aintEnough) return;
 
-    this.searchService.search(term);
+    this.searchService.search(term.toLowerCase());
     this.searchInput.setValue('');
   }
 
