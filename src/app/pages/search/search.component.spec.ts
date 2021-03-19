@@ -1,33 +1,14 @@
 import { MovieService } from './../../services/movie.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 
-import { MovieView } from './../../models/movie.view';
+import { MockMovieGrid } from './../../../mock/shared/mock-movie-grid.component';
+import { MockHeaderComponent } from './../../../mock/shared/mock-header.component';
+
 import { SearchComponent } from './search.component';
 import { Observable } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
-@Component({
-  selector: 'app-header',
-  template: ''
-})
-class MockHeaderComponent {
-  @Input()
-  title: string;
-  @Input()
-  subtitle: string;
-}
-
-@Component({
-  selector: 'app-movie-grid',
-  template: ''
-})
-class MockMovieGrid {
-  @Input()
-  movies: MovieView[];
-}
 
 let term: string;
 const MockActivatedRoute = {
