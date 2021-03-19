@@ -3,6 +3,7 @@ article.card {
   flex-direction: column;
   justify-content: space-between;
   min-height: 20rem;
+  min-width: 50ch;
   cursor: pointer;
   background-position: top;
   color: #fff;
@@ -24,7 +25,6 @@ div.header {
 }
 
 div.content {
-  width: 50ch;
   --lh: 1.2rem;
   --max-lines: 3;
 
