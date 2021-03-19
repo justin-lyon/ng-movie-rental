@@ -1,4 +1,8 @@
 article.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 20rem;
   cursor: pointer;
   background-position: top;
   color: #fff;
@@ -27,7 +31,6 @@ div.content {
   /**Major Properties**/
   overflow: hidden;
   line-height: var(--lh);
-  height: calc(var(--lh) * var(--max-lines));
   -webkit-box-orient: vertical;
   display: block;
   display: -webkit-box;

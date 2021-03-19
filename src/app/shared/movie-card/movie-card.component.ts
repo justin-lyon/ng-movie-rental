@@ -23,7 +23,7 @@ export class MovieCardComponent implements OnInit {
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0.5)
     ),
-    url(${getImgUrl(this.movie.backdropPath, 300)})`;
+    url(${getImgUrl(this.movie.backdropPath, 780)})`;
   }
 
   goToDetail(): void {
