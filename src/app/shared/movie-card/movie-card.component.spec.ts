@@ -72,8 +72,6 @@ describe('MovieCardComponent', () => {
       const path = 'path';
       const result = component.backdropImg;
 
-      expect(result).toContain('linear-gradient');
-      expect(result).toContain('rgba(0, 0, 0, 0.5)');
       expect(result).toContain(`url(${path})`);
     });
   });
