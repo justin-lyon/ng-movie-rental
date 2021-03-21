@@ -5,9 +5,11 @@ article.card {
   min-height: 20rem;
   min-width: 50ch;
   cursor: pointer;
-  background-position: top;
+
+  background-size: cover;
+  background-position: center center;
+
   color: #fff;
-  padding: 1rem;
   border: 1px solid black;
   border-radius: 1rem;
 }
@@ -21,10 +23,16 @@ h3.title {
 }
 
 div.header {
-  margin-bottom: 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 1rem 1rem 0 0;
+  padding: 1rem;
 }
 
 div.content {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0 1rem;
+  border-radius: 0 0 1rem 1rem;
+
   --lh: 1.2rem;
   --max-lines: 3;
 

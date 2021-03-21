@@ -19,11 +19,7 @@ export class MovieCardComponent implements OnInit {
   }
 
   get backdropImg(): string {
-    return `linear-gradient(
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.5)
-    ),
-    url(${getImgUrl(this.movie.backdropPath, 780)})`;
+    return `url(${getImgUrl(this.movie.backdropPath, 780)})`;
   }
 
   goToDetail(): void {
