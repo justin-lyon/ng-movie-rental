@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { MovieView } from './../../models/movie.view';
 
@@ -7,11 +7,7 @@ import { MovieView } from './../../models/movie.view';
   templateUrl: './movie-grid.component.html',
   styleUrls: ['./movie-grid.component.css']
 })
-export class MovieGridComponent implements OnInit {
+export class MovieGridComponent {
   @Input()
   movies: MovieView[];
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

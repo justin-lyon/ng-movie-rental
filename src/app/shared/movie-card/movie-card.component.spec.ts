@@ -32,7 +32,7 @@ jest.mock('./../../common/utils', () => ({
 }));
 
 describe('MovieCardComponent', () => {
-  let router: Router;
+  // let router: Router;
 
   let component: MovieCardComponent;
   let fixture: ComponentFixture<MovieCardComponent>;
@@ -45,7 +45,7 @@ describe('MovieCardComponent', () => {
   });
 
   beforeEach(() => {
-    router = TestBed.inject(Router);
+    // router = TestBed.inject(Router);
     window.alert = jest.fn();
 
     fixture = TestBed.createComponent(MovieCardComponent);

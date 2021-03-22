@@ -24,7 +24,7 @@ const mockMovies = [{ title: 'The Goonies', id: 1337 }];
 
 jest.mock('./../../services/search.service');
 describe('SearchComponent', () => {
-  let route: ActivatedRoute;
+  // let route: ActivatedRoute;
   let movieService: MovieService;
 
   let component: SearchComponent;
@@ -40,7 +40,7 @@ describe('SearchComponent', () => {
 
   beforeEach(() => {
     term = 'THE GOONIES';
-    route = TestBed.inject(ActivatedRoute);
+    // route = TestBed.inject(ActivatedRoute);
     movieService = TestBed.inject(MovieService);
 
     movieService.search = jest.fn().mockResolvedValue(mockMovies);
