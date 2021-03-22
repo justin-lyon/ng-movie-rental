@@ -1,12 +1,14 @@
 context('the home page', () => {
   const { login } = cy;
   before(() => {
+    cy.intercept('**/movies', { fixture: 'movies-popular.json' });
     login();
     cy.visit('/home');
   });
 
   it('should display', () => {
-    cy.contains('welcome home');
+    cy.get('h1').contains('Popular');
+    cy.get('small').contains('Recently trending movies');
   });
 
   it('should have a sidebar and toolbar', () => {

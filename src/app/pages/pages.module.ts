@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AccountComponent } from './account/account.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { SearchComponent } from './search/search.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SignupComponent } from './signup/signup.component';
 
@@ -14,6 +15,7 @@ import { SignupComponent } from './signup/signup.component';
     AccountComponent,
     HomeComponent,
     LoginComponent,
+    SearchComponent,
     SettingsComponent,
     SignupComponent
   ],

@@ -3,14 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './guards/auth.guard';
 
-import { AccountComponent } from './pages/account/account.component';
 import { HomeComponent } from './pages/home/home.component';
+import { SearchComponent } from './pages/search/search.component';
 import { LoginComponent } from './pages/login/login.component';
-import { SettingsComponent } from './pages/settings/settings.component';
 import { SignupComponent } from './pages/signup/signup.component';
+
+import { AccountComponent } from './pages/account/account.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
+  { path: 'search', component: SearchComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   {
