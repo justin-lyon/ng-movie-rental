@@ -3,26 +3,42 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './guards/auth.guard';
 
-import { HomeComponent } from './pages/home/home.component';
-import { SearchComponent } from './pages/search/search.component';
-import { LoginComponent } from './pages/login/login.component';
-import { SignupComponent } from './pages/signup/signup.component';
-
-import { AccountComponent } from './pages/account/account.component';
-import { SettingsComponent } from './pages/settings/settings.component';
-
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'search', component: SearchComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./pages/login/login.module').then(m => m.LoginModule)
+  },
+  {
+    path: 'signup',
+    loadChildren: () =>
+      import('./pages/signup/signup.module').then(m => m.SignupModule)
+  },
   {
     path: '',
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: '/home', pathMatch: 'full' },
-      { path: 'account', component: AccountComponent },
-      { path: 'settings', component: SettingsComponent }
+      {
+        path: 'home',
+        loadChildren: () =>
+          import('./pages/home/home.module').then(m => m.HomeModule)
+      },
+      {
+        path: 'search',
+        loadChildren: () =>
+          import('./pages/search/search.module').then(m => m.SearchModule)
+      },
+      {
+        path: 'account',
+        loadChildren: () =>
+          import('./pages/account/account.module').then(m => m.AccountModule)
+      },
+      {
+        path: 'settings',
+        loadChildren: () =>
+          import('./pages/settings/settings.module').then(m => m.SettingsModule)
+      }
     ]
   },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }
