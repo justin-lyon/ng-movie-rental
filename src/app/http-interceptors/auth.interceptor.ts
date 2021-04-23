@@ -6,7 +6,6 @@ import {
   HttpRequest,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Router } from '@angular/router';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -18,7 +17,7 @@ const OPEN_ENDPOINTS = ['signup', 'auth/login'];
 /** Pass untouched request through to the next request handler. */
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -32,6 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const authReq = req.clone({
       setHeaders: { Authorization: `Bearer ${bearerToken}` }
     });
+
     return next.handle(authReq).pipe(
       map(event => {
         return event;

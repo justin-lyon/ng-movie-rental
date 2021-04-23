@@ -2,13 +2,7 @@ import { Router } from '@angular/router';
 import { TestBed } from '@angular/core/testing';
 
 import { SearchService } from './search.service';
-
-const MockRouter = {
-  provide: Router,
-  useValue: {
-    navigate: jest.fn().mockResolvedValue(true)
-  }
-};
+import { MockRouter } from 'src/mock/ng/mock-router.ng';
 
 describe('SearchService', () => {
   let router: Router;

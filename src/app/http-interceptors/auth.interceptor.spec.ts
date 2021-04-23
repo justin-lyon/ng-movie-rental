@@ -1,9 +1,10 @@
-import { AuthInterceptor } from './auth.interceptor';
-import { AuthService, TOKEN_STORAGE } from './../services/auth.service';
 import { TestBed } from '@angular/core/testing';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 
 import { first } from 'rxjs/operators';
+
+import { AuthInterceptor } from './auth.interceptor';
+import { AuthService, TOKEN_STORAGE } from './../services/auth.service';
 
 import {
   HttpClientTestingModule,

@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MockRouter } from 'src/mock/ng/mock-router.ng';
 
 const MOCK_USER_ID = 'new-user-id';
 const newUser: NewUserModel = {
@@ -25,7 +26,6 @@ const savedUser: UserModel = {
 };
 const MOCK_LOGIN_RESPONSE = `${newUser.username} i.ama.jwt`;
 
-jest.mock('@angular/router');
 jest.mock('./../../services/auth.service');
 describe('SignupComponent', () => {
   let component: SignupComponent;
@@ -44,7 +44,7 @@ describe('SignupComponent', () => {
         MatInputModule,
         NoopAnimationsModule
       ],
-      providers: [Router, AuthService]
+      providers: [MockRouter, AuthService]
     }).compileComponents();
   });
 

@@ -1,16 +1,16 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
+import { MockHttpClient } from 'src/mock/ng/mock-http-client.ng';
 
 import { MovieService, PATH } from './movie.service';
 
-jest.mock('@angular/common/http');
 describe('MovieService', () => {
   let http: HttpClient;
   let service: MovieService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ providers: [HttpClient] });
+    TestBed.configureTestingModule({ providers: [MockHttpClient] });
 
     http = TestBed.inject(HttpClient);
     http.get = jest.fn().mockReturnValue(of([]));
