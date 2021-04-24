@@ -22,4 +22,8 @@ export class MovieService {
   getPopularMovies(): Promise<MovieView[]> {
     return this.http.get<MovieView[]>(PATH).toPromise();
   }
+
+  getOneById(movieId: number): Promise<MovieView> {
+    return this.http.get<MovieView>(`${PATH}/${movieId}`).toPromise();
+  }
 }
