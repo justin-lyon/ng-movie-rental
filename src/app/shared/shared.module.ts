@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RouterModule } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -15,7 +14,6 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
 import { HeaderComponent } from './header/header.component';
 
 const sharedModules = [
-  BrowserModule,
   FlexLayoutModule,
   FormsModule,
   LayoutModule,

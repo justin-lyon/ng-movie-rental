@@ -1,13 +1,16 @@
-import { AuthService } from './../services/auth.service';
 import { Injectable } from '@angular/core';
 import {
   HttpEvent,
   HttpInterceptor,
   HttpHandler,
-  HttpRequest
+  HttpRequest,
+  HttpErrorResponse
 } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+
+import { AuthService } from './../services/auth.service';
 
 const OPEN_ENDPOINTS = ['signup', 'auth/login'];
 
@@ -28,6 +31,17 @@ export class AuthInterceptor implements HttpInterceptor {
     const authReq = req.clone({
       setHeaders: { Authorization: `Bearer ${bearerToken}` }
     });
-    return next.handle(authReq);
+
+    return next.handle(authReq).pipe(
+      map(event => {
+        return event;
+      }),
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401 || error.status === 403) {
+          this.authService.logout();
+        }
+        return throwError(error);
+      })
+    );
   }
 }

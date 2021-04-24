@@ -1,10 +1,10 @@
-import { Router } from '@angular/router';
 import { TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { MockRouter } from 'src/mock/ng/mock-router.ng';
 
 import { AuthService } from './../services/auth.service';
 import { AuthGuard } from './auth.guard';
 
-jest.mock('@angular/router');
 jest.mock('./../services/auth.service');
 describe('AuthGuard', () => {
   let authService: AuthService;
@@ -13,7 +13,7 @@ describe('AuthGuard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthService, Router]
+      providers: [AuthService, MockRouter]
     });
 
     authService = TestBed.inject(AuthService);

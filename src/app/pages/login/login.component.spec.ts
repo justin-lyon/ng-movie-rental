@@ -8,13 +8,13 @@ import { AuthService } from './../../services/auth.service';
 import { LoginComponent } from './login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MockRouter } from 'src/mock/ng/mock-router.ng';
 
 const newUser = {
   email: 'belcher.louise@hotmail.com',
   password: 'kuchiK0pi!'
 };
 
-jest.mock('@angular/router');
 jest.mock('./../../services/auth.service');
 describe('LoginComponent', () => {
   let router: Router;
@@ -33,7 +33,7 @@ describe('LoginComponent', () => {
         MatInputModule,
         NoopAnimationsModule
       ],
-      providers: [AuthService, Router]
+      providers: [AuthService, MockRouter]
     }).compileComponents();
   });
 
