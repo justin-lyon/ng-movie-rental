@@ -5,14 +5,14 @@ context('the router', () => {
       logout();
     });
 
-    it('should route from forward slash to /home', () => {
+    it('should route from forward slash to /login when logged out', () => {
       cy.visit('/');
-      cy.url().should('include', '/home');
+      cy.url().should('include', '/login');
     });
 
-    it('should route from unmatched route to /home', () => {
+    it('should route from unmatched route to /login', () => {
       cy.visit('/this-is-not-a-real-route/and/never-will-be');
-      cy.url().should('include', '/home');
+      cy.url().should('include', '/login');
     });
 
     it('should route to /login', () => {
@@ -27,6 +27,16 @@ context('the router', () => {
   });
 
   describe('the protected routes', () => {
+    it('should route from forward slash to /home when logged in', () => {
+      cy.visit('/');
+      cy.url().should('include', '/home');
+    });
+
+    it('should route from unmatched route to /home', () => {
+      cy.visit('/this-is-not-a-real-route/and/never-will-be');
+      cy.url().should('include', '/home');
+    });
+
     it('should re-route /account to /login if not logged in', () => {
       logout();
       cy.visit('/account');
