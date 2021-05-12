@@ -9,7 +9,7 @@ import { MovieService } from '../../services/movie.service';
   styleUrls: ['./movie-detail.component.css']
 })
 export class MovieDetailComponent implements OnInit {
-  movie: MovieView;
+  movie: MovieView | null;
 
   constructor(
     private movieService: MovieService,
@@ -18,6 +18,12 @@ export class MovieDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchMovie();
+  }
+
+  get backdropImg(): string {
+    console.log('get backdrop url');
+    const width = 'original';
+    return `url(http://image.tmdb.org/t/p/${width}${this.movie.backdropPath})`;
   }
 
   fetchMovie(): Promise<MovieView> {

@@ -1,2 +1,6 @@
-<p>movie-detail works!</p>
-<p>{{ movie.title }}</p>
+<ng-container *ngIf="movie">
+  <div class="item" [ngStyle]="{ 'background-image': backdropImg }">
+    <p>movie-detail works!</p>
+    <p>{{ movie.title }}</p>
+  </div>
+</ng-container>
