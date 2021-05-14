@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 let term: string;
-const MockActivatedRoute = {
+const ActivatedRouteMock = {
   provide: ActivatedRoute,
   useValue: {
     queryParams: Observable.create(obs => {
@@ -34,7 +34,7 @@ describe('SearchComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [SearchComponent, MockHeaderComponent, MockMovieGrid],
       imports: [RouterTestingModule, HttpClientTestingModule],
-      providers: [MovieService, MockActivatedRoute]
+      providers: [MovieService, ActivatedRouteMock]
     }).compileComponents();
   });
 

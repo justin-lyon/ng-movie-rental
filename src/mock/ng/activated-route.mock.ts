@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 
-export const MockActivatedRoute = {
+export const ActivatedRouteMock = {
   provide: ActivatedRoute,
   useValue: {
     snapshot: {

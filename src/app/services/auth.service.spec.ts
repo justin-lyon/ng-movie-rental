@@ -4,7 +4,7 @@ import { fakeAsync, flush, TestBed } from '@angular/core/testing';
 
 import { SIGNUP_PATH, PATH, TOKEN_STORAGE, AuthService } from './auth.service';
 import { of } from 'rxjs';
-import { MockHttpClient } from '../../mock/ng/http-client.mock';
+import { HttpClientMock } from '../../mock/ng/http-client.mock';
 
 describe('AuthService', () => {
   const newUser = {
@@ -17,7 +17,7 @@ describe('AuthService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MockHttpClient]
+      providers: [HttpClientMock]
     });
 
     http = TestBed.inject(HttpClient);

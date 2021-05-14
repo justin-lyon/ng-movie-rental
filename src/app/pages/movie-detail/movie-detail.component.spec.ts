@@ -1,6 +1,6 @@
 import { MovieDetailView } from './../../models/movie-detail.view';
 import { ActivatedRoute } from '@angular/router';
-import { MockActivatedRoute } from './../../../mock/ng/activated-route.mock';
+import { ActivatedRouteMock } from './../../../mock/ng/activated-route.mock';
 import { MovieService } from './../../services/movie.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -16,7 +16,7 @@ describe('MovieDetailComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MovieDetailComponent],
-      providers: [MovieService, MockActivatedRoute]
+      providers: [MovieService, ActivatedRouteMock]
     }).compileComponents();
   });
 
