@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MockMovieGrid } from './../../../mock/shared/mock-movie-grid.component';
+import { MovieGridMock } from '../../../mock/shared/movie-grid.component.mock';
 import { HeaderComponentMock } from '../../../mock/shared/header.component.mock';
 
 import { MovieService } from './../../services/movie.service';
@@ -14,7 +14,7 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HomeComponent, HeaderComponentMock, MockMovieGrid],
+      declarations: [HomeComponent, HeaderComponentMock, MovieGridMock],
       providers: [MovieService]
     }).compileComponents();
   });
