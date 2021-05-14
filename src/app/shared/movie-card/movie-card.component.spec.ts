@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MovieCardComponent } from './movie-card.component';
 
-const MockRouter = {
+const RouterMock = {
   provide: Router,
   useValue: {
     navigate: jest.fn().mockResolvedValue(true)
@@ -40,7 +40,7 @@ describe('MovieCardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MovieCardComponent],
-      providers: [MockRouter]
+      providers: [RouterMock]
     }).compileComponents();
   });
 
