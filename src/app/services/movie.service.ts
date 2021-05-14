@@ -1,4 +1,4 @@
-import { MovieView } from '../models/movie.view';
+import { MovieDetailView, MovieView } from '../models';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -23,7 +23,7 @@ export class MovieService {
     return this.http.get<MovieView[]>(PATH).toPromise();
   }
 
-  getOneById(movieId: number): Promise<MovieView> {
-    return this.http.get<MovieView>(`${PATH}/${movieId}`).toPromise();
+  getOneById(movieId: number): Promise<MovieDetailView> {
+    return this.http.get<MovieDetailView>(`${PATH}/${movieId}`).toPromise();
   }
 }

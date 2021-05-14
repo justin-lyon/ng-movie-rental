@@ -1,6 +1,6 @@
+import { MovieDetailView } from '../../models';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MovieView } from '../../models';
 import { MovieService } from '../../services/movie.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { MovieService } from '../../services/movie.service';
   styleUrls: ['./movie-detail.component.css']
 })
 export class MovieDetailComponent implements OnInit {
-  movie: MovieView | null;
+  movie: MovieDetailView | null;
 
   constructor(
     private movieService: MovieService,
@@ -26,11 +26,11 @@ export class MovieDetailComponent implements OnInit {
     return `url(http://image.tmdb.org/t/p/${width}${this.movie.backdropPath})`;
   }
 
-  fetchMovie(): Promise<MovieView> {
+  fetchMovie(): Promise<MovieDetailView> {
     const movieId = Number(this.route.snapshot.paramMap.get('id'));
     return this.movieService
       .getOneById(movieId)
-      .then((movie: MovieView) => {
+      .then((movie: MovieDetailView) => {
         this.movie = movie;
         console.log('movie found', movie);
         return movie;
