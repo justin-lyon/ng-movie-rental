@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 
 import { MockMovieGrid } from './../../../mock/shared/mock-movie-grid.component';
-import { MockHeaderComponent } from './../../../mock/shared/mock-header.component';
+import { HeaderComponentMock } from '../../../mock/shared/header.component.mock';
 
 import { SearchComponent } from './search.component';
 import { Observable } from 'rxjs';
@@ -32,7 +32,7 @@ describe('SearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SearchComponent, MockHeaderComponent, MockMovieGrid],
+      declarations: [SearchComponent, HeaderComponentMock, MockMovieGrid],
       imports: [RouterTestingModule, HttpClientTestingModule],
       providers: [MovieService, ActivatedRouteMock]
     }).compileComponents();
