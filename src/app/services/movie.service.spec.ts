@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { MockHttpClient } from 'src/mock/ng/mock-http-client.ng';
+import { MockHttpClient } from '../../mock/ng/http-client.mock';
 
 import { MovieService, PATH } from './movie.service';
 
