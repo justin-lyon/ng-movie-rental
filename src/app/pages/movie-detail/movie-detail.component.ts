@@ -10,6 +10,10 @@ import { MovieService } from '../../services/movie.service';
 })
 export class MovieDetailComponent implements OnInit {
   movie: MovieDetailView | null;
+  genres: string[];
+  spokenLanguages: string[];
+  backdropUrl: string;
+  posterUrl: string;
 
   constructor(
     private movieService: MovieService,
@@ -20,10 +24,15 @@ export class MovieDetailComponent implements OnInit {
     this.fetchMovie();
   }
 
-  get backdropImg(): string {
+  buildBackdropUrl(): void {
     console.log('get backdrop url');
-    const width = 'original';
-    return `url(http://image.tmdb.org/t/p/${width}${this.movie.backdropPath})`;
+    const width = 1280;
+    this.backdropUrl = `url(http://image.tmdb.org/t/p/w${width}${this.movie.backdropPath})`;
+  }
+
+  buildPosterUrl(): void {
+    const width = 342;
+    this.posterUrl = `url(http://image.tmdb.org/t/p/w${width}${this.movie.posterPath})`;
   }
 
   fetchMovie(): Promise<MovieDetailView> {
@@ -32,7 +41,11 @@ export class MovieDetailComponent implements OnInit {
       .getOneById(movieId)
       .then((movie: MovieDetailView) => {
         this.movie = movie;
+        this.genres = movie.genres.map(g => g.name);
+        this.spokenLanguages = movie.spokenLanguages.map(l => l.name);
         console.log('movie found', movie);
+        this.buildBackdropUrl();
+        this.buildPosterUrl();
         return movie;
       })
       .catch(error => {

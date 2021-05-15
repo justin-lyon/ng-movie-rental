@@ -1,9 +1,59 @@
-<ng-container *ngIf="movie">
-  <div class="item" [ngStyle]="{ 'background-image': backdropImg }">
-    <p>movie-detail works!</p>
-    <p>{{ movie.title }}</p>
-    <div>{{ movie.releaseDate }}</div>
-    <div>{{ movie.overview }}</div>
-    <div>{{ movie.voteAverage }}</div>
+<ng-container *ngIf="!movie">
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
   </div>
+</ng-container>
+<ng-container *ngIf="movie">
+  <section>
+    <div class="backdrop" [ngStyle]="{ 'background-image': backdropUrl }">
+      <div class="title">
+        <h1>{{ movie.title }}</h1>
+        <div class="subtitle">
+          <small *ngIf="movie.tagline"> {{ movie.tagline }} </small>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="about">
+        <ul class="genres">
+          <li *ngFor="let g of genres">
+            {{ g }}
+          </li>
+        </ul>
+        <p *ngIf="movie.overview" class="overview">{{ movie.overview }}</p>
+        <div class="details">
+          <div class="left">
+            <div>{{ movie.releaseDate }}</div>
+            <div>{{ movie.runtime }}</div>
+            <div>{{ movie.originalLanguage }}</div>
+            <ul>
+              <li *ngFor="let l of spokenLanguages">
+                {{ l }}
+              </li>
+            </ul>
+            <div>{{ movie.budget | currency }}</div>
+            <div>{{ movie.revenue | currency }}</div>
+          </div>
+          <div class="right">
+            <div>
+              {{ movie.popularity }}
+              <mat-icon
+                aria-hidden="false"
+                aria-label="popularity tooltip"
+                matTooltip="some help text"
+                matTooltipPosition="left"
+              >
+                info
+              </mat-icon>
+            </div>
+            <div>{{ movie.voteCount }}</div>
+            <div>{{ movie.voteAverage }}</div>
+            <div>{{ movie.homepage }}</div>
+            <div>{{ movie.imdbId }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="poster" [ngStyle]="{ 'background-image': posterUrl }"></div>
+    </div>
+  </section>
 </ng-container>

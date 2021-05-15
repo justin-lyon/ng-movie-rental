@@ -1,3 +1,50 @@
-.item {
+.spinner-container {
+  display: flex;
+  justify-content: center;
+}
+
+.backdrop {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  min-height: 50vh;
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  overflow: hidden;
+}
+
+.title {
   color: #fff;
+  padding-left: 2rem;
+  padding-bottom: 1rem;
+  background: linear-gradient(transparent, 20%, black);
+}
+
+.title > h1 {
+  margin-bottom: 0;
+  text-transform: uppercase;
+  font-size: xx-large;
+}
+
+.subtitle > * {
+  display: block;
+  font-size: small;
+}
+
+.content {
+  display: flex;
+
+  margin-top: 1rem;
+}
+
+.poster {
+  min-width: 342px;
+  min-height: 39vh;
+  border-radius: 15px;
+  background-size: cover;
 }
