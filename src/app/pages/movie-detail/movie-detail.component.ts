@@ -14,6 +14,7 @@ export class MovieDetailComponent implements OnInit {
   spokenLanguages: string[];
   backdropUrl: string;
   posterUrl: string;
+  imdbUrl: string;
 
   constructor(
     private movieService: MovieService,
@@ -35,6 +36,10 @@ export class MovieDetailComponent implements OnInit {
     this.posterUrl = `url(http://image.tmdb.org/t/p/w${width}${this.movie.posterPath})`;
   }
 
+  buildImdbUrl(): void {
+    this.imdbUrl = `https://www.imdb.com/title/${this.movie.imdbId}`;
+  }
+
   fetchMovie(): Promise<MovieDetailView> {
     const movieId = Number(this.route.snapshot.paramMap.get('id'));
     return this.movieService
@@ -46,6 +51,7 @@ export class MovieDetailComponent implements OnInit {
         console.log('movie found', movie);
         this.buildBackdropUrl();
         this.buildPosterUrl();
+        this.buildImdbUrl();
         return movie;
       })
       .catch(error => {

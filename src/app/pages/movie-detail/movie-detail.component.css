@@ -1,7 +1,7 @@
-/* ul:first-child {
-  list-style-type: none;
-} */
-
+ul {
+  margin: 0;
+  padding: 0;
+}
 ul li {
   display: inline;
 }
@@ -12,6 +12,30 @@ ul li::after {
 
 ul li:last-of-type::after {
   content: '';
+}
+
+.field {
+  margin-bottom: 0.5rem;
+}
+
+div.field:last-of-type {
+  margin-bottom: 0;
+}
+
+.field label {
+  display: block;
+  font-weight: 200;
+}
+
+.field span,
+.field ul {
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.7rem;
+}
+
+.field mat-icon {
+  font-size: 1.3rem;
 }
 
 .spinner-container {
@@ -34,15 +58,20 @@ ul li:last-of-type::after {
   overflow: hidden;
 }
 
+.title-gradient {
+  padding: 2rem 1rem;
+  background: linear-gradient(transparent, 20%, black);
+
+  display: flex;
+  justify-content: space-between;
+}
+
 .title {
   color: #fff;
-  padding-left: 2rem;
-  padding-bottom: 1rem;
-  background: linear-gradient(transparent, 20%, black);
 }
 
 .title > h1 {
-  margin-bottom: 0;
+  margin: 0 0;
   text-transform: uppercase;
   font-size: xx-large;
 }
@@ -52,16 +81,26 @@ ul li:last-of-type::after {
   font-size: small;
 }
 
+.genres {
+  align-self: center;
+}
+
 .content {
   display: flex;
   justify-content: space-between;
 
   margin-top: 1rem;
+  gap: 1rem;
+}
+
+.overview {
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 
 .details {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .poster {
@@ -69,4 +108,16 @@ ul li:last-of-type::after {
   min-height: 272px;
   border-radius: 15px;
   background-size: cover;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.titlecase {
+  text-transform: capitalize;
+}
+
+.display-hidden {
+  display: hidden;
 }
