@@ -31,7 +31,7 @@ export class MovieDetailComponent implements OnInit {
   }
 
   buildPosterUrl(): void {
-    const width = 342;
+    const width = 185;
     this.posterUrl = `url(http://image.tmdb.org/t/p/w${width}${this.movie.posterPath})`;
   }
 

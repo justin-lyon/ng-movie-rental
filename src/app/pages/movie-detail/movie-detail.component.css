@@ -38,13 +38,19 @@
 
 .content {
   display: flex;
+  justify-content: space-between;
 
   margin-top: 1rem;
 }
 
+.details {
+  display: flex;
+  justify-content: space-between;
+}
+
 .poster {
-  min-width: 342px;
-  min-height: 39vh;
+  min-width: 185px;
+  min-height: 272px;
   border-radius: 15px;
   background-size: cover;
 }
