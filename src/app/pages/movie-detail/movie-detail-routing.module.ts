@@ -9,4 +9,4 @@ const routes: Routes = [{ path: '', component: MovieDetailComponent }];
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class MovieDetailRoutingModule { }
+export class MovieDetailRoutingModule {}

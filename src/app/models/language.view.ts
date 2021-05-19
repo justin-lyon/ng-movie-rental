@@ -1,4 +1,4 @@
 export class LanguageView {
-  isoCode: string;
+  languageCode: string;
   name: string;
 }
