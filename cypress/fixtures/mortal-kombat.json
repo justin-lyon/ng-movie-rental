@@ -1,0 +1,55 @@
+{
+  "id": 460465,
+  "title": "Mortal Kombat",
+  "releaseDate": "2021-04-23",
+  "isAdult": false,
+  "backdropPath": "/6ELCZlTA5lGUops70hKdB83WJxH.jpg",
+  "budget": 20000000,
+  "genres": [
+    { "id": 28, "name": "Action" },
+    { "id": 14, "name": "Fantasy" },
+    { "id": 12, "name": "Adventure" }
+  ],
+  "homepage": "https://www.mortalkombatmovie.net",
+  "imdbId": "tt0293429",
+  "originalLanguage": "en",
+  "originalTitle": "Mortal Kombat",
+  "overview": "Washed-up MMA fighter Cole Young, unaware of his heritage, and hunted by Emperor Shang Tsung's best warrior, Sub-Zero, seeks out and trains with Earth's greatest champions as he prepares to stand against the enemies of Outworld in a high stakes battle for the universe.",
+  "popularity": 2309.097,
+  "posterPath": "/nkayOAUBUu4mMvyNf9iHSUiPjF1.jpg",
+  "productionCompanies": [
+    {
+      "name": "Atomic Monster",
+      "id": 76907,
+      "logo_path": "/wChlWsVgwSd4ZWxTIm8PTEcaESz.png",
+      "origin_country": "US"
+    },
+    {
+      "name": "Broken Road Productions",
+      "id": 8000,
+      "logo_path": "/f8NwLg72BByt3eav7lX1lcJfe60.png",
+      "origin_country": "US"
+    },
+    {
+      "name": "New Line Cinema",
+      "id": 12,
+      "logo_path": "/iaYpEp3LQmb8AfAtmTvpqd4149c.png",
+      "origin_country": "US"
+    }
+  ],
+  "productionCountries": [
+    { "name": "United States of America", "iso_3166_1": "US" }
+  ],
+  "revenue": 76706000,
+  "runtime": 110,
+  "spokenLanguages": [
+    { "languageCode": "ja", "name": "日本語" },
+    { "languageCode": "en", "name": "English" },
+    { "languageCode": "zh", "name": "普通话" }
+  ],
+  "status": "Released",
+  "tagline": "Get over here.",
+  "isVideo": false,
+  "voteAverage": 7.6,
+  "voteCount": 2518
+}
