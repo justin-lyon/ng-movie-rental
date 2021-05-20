@@ -5,6 +5,7 @@ import { MovieService } from './../../services/movie.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { MovieDetailComponent } from './movie-detail.component';
 
@@ -54,7 +55,7 @@ describe('MovieDetailComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [MovieDetailComponent],
-      imports: [MatProgressSpinnerModule],
+      imports: [MatChipsModule, MatProgressSpinnerModule],
       providers: [MovieService, ActivatedRouteMock]
     }).compileComponents();
   });
