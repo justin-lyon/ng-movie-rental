@@ -3,15 +3,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 
-import { MockMovieGrid } from './../../../mock/shared/mock-movie-grid.component';
-import { MockHeaderComponent } from './../../../mock/shared/mock-header.component';
+import { MovieGridMock } from '../../../mock/shared/movie-grid.component.mock';
+import { HeaderComponentMock } from '../../../mock/shared/header.component.mock';
 
 import { SearchComponent } from './search.component';
 import { Observable } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 let term: string;
-const MockActivatedRoute = {
+const ActivatedRouteMock = {
   provide: ActivatedRoute,
   useValue: {
     queryParams: Observable.create(obs => {
@@ -32,9 +32,9 @@ describe('SearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SearchComponent, MockHeaderComponent, MockMovieGrid],
+      declarations: [SearchComponent, HeaderComponentMock, MovieGridMock],
       imports: [RouterTestingModule, HttpClientTestingModule],
-      providers: [MovieService, MockActivatedRoute]
+      providers: [MovieService, ActivatedRouteMock]
     }).compileComponents();
   });
 

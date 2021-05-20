@@ -8,7 +8,7 @@ import { AuthService } from './../../services/auth.service';
 import { LoginComponent } from './login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MockRouter } from 'src/mock/ng/mock-router.ng';
+import { RouterMock } from '../../../mock/ng/router.mock';
 
 const newUser = {
   email: 'belcher.louise@hotmail.com',
@@ -33,7 +33,7 @@ describe('LoginComponent', () => {
         MatInputModule,
         NoopAnimationsModule
       ],
-      providers: [AuthService, MockRouter]
+      providers: [AuthService, RouterMock]
     }).compileComponents();
   });
 

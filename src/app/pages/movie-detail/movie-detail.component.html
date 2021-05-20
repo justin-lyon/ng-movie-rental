@@ -1,0 +1,115 @@
+<ng-container *ngIf="!movie">
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-container>
+<ng-container *ngIf="movie">
+  <section>
+    <div class="backdrop" [ngStyle]="{ 'background-image': backdropUrl }">
+      <div class="title-gradient">
+        <div class="title">
+          <h1>{{ movie.title }}</h1>
+          <div class="subtitle">
+            <small *ngIf="movie.tagline"> {{ movie.tagline }} </small>
+          </div>
+        </div>
+        <div class="genres">
+          <mat-chip-list>
+            <mat-chip *ngFor="let g of genres" disabled selected color="accent">
+              {{ g }}
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="about">
+        <p *ngIf="movie.overview" class="overview">{{ movie.overview }}</p>
+        <hr />
+        <div class="details">
+          <div class="left">
+            <div class="field">
+              <label for="releaseDate">Release Date</label>
+              <span id="releaseDate">
+                {{ movie.releaseDate | date }}
+              </span>
+            </div>
+            <div class="field">
+              <label for="runtime">Duration</label>
+              <span id="runtime"> {{ movie.runtime }} min. </span>
+            </div>
+            <div class="field">
+              <label for="originalLanguage">Language</label>
+              <span id="originalLanguage" class="uppercase">
+                {{ movie.originalLanguage }}
+              </span>
+            </div>
+            <div class="field">
+              <label for="spokenLanguages">Spoken Languages</label>
+              <ul id="spokenLanguages" class="titlecase">
+                <li *ngFor="let l of spokenLanguages">
+                  {{ l }}
+                </li>
+              </ul>
+            </div>
+            <div class="field">
+              <label for="budget">Budget</label>
+              <span id="budget">
+                {{ movie.budget | currency }}
+              </span>
+            </div>
+            <div class="field">
+              <label for="revenue">Revenue</label>
+              <span id="revenue">
+                {{ movie.revenue | currency }}
+              </span>
+            </div>
+          </div>
+
+          <div class="right">
+            <div class="field">
+              <label for="popularity">Popularity Score</label>
+              <span id="popularity">
+                {{ movie.popularity }}
+              </span>
+              <mat-icon
+                aria-hidden="false"
+                aria-label="popularity tooltip"
+                matTooltip="Popularity metrics from TMDB"
+                matTooltipPosition="left"
+              >
+                info
+              </mat-icon>
+            </div>
+            <div class="field">
+              <label for="voteCount">Total Votes</label>
+              <span id="voteCount">
+                {{ movie.voteCount }}
+              </span>
+            </div>
+            <div class="field">
+              <label for="voteAverage">Vote Average</label>
+              <span id="voteAverage">
+                {{ movie.voteAverage }}
+              </span>
+            </div>
+            <div class="field">
+              <label for="homepage" class="hidden-label">Homepage</label>
+              <span id="homepage">
+                <a [href]="movie.homepage" target="_blank">Link</a>
+              </span>
+            </div>
+            <div class="field">
+              <label for="imdbLink" class="hidden-label">IMDB Link</label>
+              <span id="imdbLink">
+                <a [href]="imdbUrl" target="_blank"> IMDB </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="poster" [ngStyle]="{ 'background-image': posterUrl }"></div>
+    </div>
+  </section>
+</ng-container>

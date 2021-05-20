@@ -30,6 +30,13 @@ const routes: Routes = [
           import('./pages/search/search.module').then(m => m.SearchModule)
       },
       {
+        path: 'movie/:id',
+        loadChildren: () =>
+          import('./pages/movie-detail/movie-detail.module').then(
+            m => m.MovieDetailModule
+          )
+      },
+      {
         path: 'account',
         loadChildren: () =>
           import('./pages/account/account.module').then(m => m.AccountModule)

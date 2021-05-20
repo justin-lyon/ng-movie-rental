@@ -5,7 +5,7 @@ import { MovieView } from '../../app/models/movie.view';
   selector: 'app-movie-grid',
   template: ''
 })
-export class MockMovieGrid {
+export class MovieGridMock {
   @Input()
   movies: MovieView[];
 }

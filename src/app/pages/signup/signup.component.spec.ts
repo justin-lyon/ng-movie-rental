@@ -11,7 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MockRouter } from 'src/mock/ng/mock-router.ng';
+import { RouterMock } from '../../../mock/ng/router.mock';
 
 const MOCK_USER_ID = 'new-user-id';
 const newUser: NewUserModel = {
@@ -44,7 +44,7 @@ describe('SignupComponent', () => {
         MatInputModule,
         NoopAnimationsModule
       ],
-      providers: [MockRouter, AuthService]
+      providers: [RouterMock, AuthService]
     }).compileComponents();
   });
 

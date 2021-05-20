@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'app-header',
   template: ''
 })
-export class MockHeaderComponent {
+export class HeaderComponentMock {
   @Input()
   title: string;
   @Input()

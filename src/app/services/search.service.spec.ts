@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { TestBed } from '@angular/core/testing';
 
 import { SearchService } from './search.service';
-import { MockRouter } from 'src/mock/ng/mock-router.ng';
+import { RouterMock } from '../../mock/ng/router.mock';
 
 describe('SearchService', () => {
   let router: Router;
@@ -10,7 +10,7 @@ describe('SearchService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MockRouter]
+      providers: [RouterMock]
     });
     router = TestBed.inject(Router);
     router.navigate = jest.fn().mockResolvedValue(true);

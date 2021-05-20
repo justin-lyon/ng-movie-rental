@@ -23,6 +23,6 @@ export class MovieCardComponent implements OnInit {
   }
 
   goToDetail(): void {
-    alert('TODO - Implement Movie Detail Router Link Here');
+    this.router.navigate([`movie/${this.movie.id}`]);
   }
 }
