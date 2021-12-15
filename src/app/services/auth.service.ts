@@ -28,8 +28,8 @@ export class AuthService {
     return this.http
       .post(PATH, { email, password }, { responseType: 'text' })
       .toPromise()
-      .then((data: string) => {
-        this.setToken(data.split(' ')[1]);
+      .then((token: string) => {
+        this.setToken(token);
       });
   }
 
