@@ -26,14 +26,17 @@ context('login page', () => {
         cy.get(loginBtn).should('be.disabled');
         cy.get(email).focus().blur();
         assertMatError('This field is required.');
+
         typeValue(email, 'not-an-email');
         assertMatError('Please enter a valid email address.');
+
         typeValue(email, 'burgerbob@burgerfans.net');
         cy.get('mat-error').should('not.exist');
 
         cy.get(loginBtn).should('be.disabled');
         cy.get(password).focus().blur();
         assertMatError('This field is required.');
+
         typeValue(password, 'any thing at all');
         cy.get('mat-error').should('not.exist');
 
@@ -44,7 +47,7 @@ context('login page', () => {
 
   describe('submit async validation failure', () => {
     beforeEach(() => {
-      cy.intercept('POST', '/login', { statusCode: 403 });
+      cy.intercept('POST', 'auth/login', { statusCode: 403 }).as('login');
     });
 
     it('should report invalid username or password on error', () => {
@@ -52,6 +55,11 @@ context('login page', () => {
         typeValue(email, 'burgerbob@burgerfans.net');
         typeValue(password, 'noHumanMe@t123');
         cy.get(loginBtn).click();
+
+        cy.wait('@login').then(({ response }) => {
+          expect(response.statusCode).to.eq(403);
+        });
+
         assertMatError('Invalid username or password.');
       });
     });
@@ -59,13 +67,19 @@ context('login page', () => {
 
   describe('submit async validation success', () => {
     beforeEach(() => {
-      cy.intercept('POST', '/login', { fixture: 'login.txt' });
+      cy.intercept('POST', 'auth/login', { fixture: 'login.txt' }).as('login');
     });
 
     it('should navigate to /home on success', () => {
       typeValue(email, 'burgerbob@burgerfans.net');
       typeValue(password, 'noHumanMe@t123');
       cy.get(loginBtn).click();
+
+      cy.wait('@login').then(({ response }) => {
+        expect(response.statusCode).to.eq(200);
+        expect(localStorage.getItem('token')).to.eq(response.body);
+      });
+
       cy.url().should('include', '/home');
     });
   });
