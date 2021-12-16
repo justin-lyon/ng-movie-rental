@@ -23,7 +23,7 @@ const messages = {
 
 const interceptSignup = () => {
   cy.intercept('POST', '/signup', { fixture: 'signup.json' });
-  cy.intercept('POST', '/login', { fixture: 'login.txt' });
+  cy.intercept('POST', '/auth/login', { fixture: 'login.txt' });
   cy.intercept('GET', '/movies', []);
 };
 
@@ -127,8 +127,7 @@ context('the signup page', () => {
       });
 
       cy.fixture('login.txt').then(data => {
-        const token = data.split(' ')[1];
-        expect(localStorage.getItem('token')).to.eq(token);
+        expect(localStorage.getItem('token')).to.eq(data);
       });
     });
   });
