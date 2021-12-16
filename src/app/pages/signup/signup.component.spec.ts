@@ -73,12 +73,8 @@ describe('SignupComponent', () => {
     it('should create a formgroup with controls', () => {
       component.ngOnInit();
       expect(component.signupForm).toBeDefined();
-      const {
-        username,
-        email,
-        password,
-        password2
-      } = component.signupForm.value;
+      const { username, email, password, password2 } =
+        component.signupForm.value;
       expect(username).toBeDefined();
       expect(email).toBeDefined();
       expect(password).toBeDefined();

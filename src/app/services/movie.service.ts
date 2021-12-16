@@ -14,9 +14,7 @@ export class MovieService {
     let params = new HttpParams();
     params = params.set('searchTerm', term);
 
-    return this.http
-      .get<MovieView[]>(PATH, { params })
-      .toPromise();
+    return this.http.get<MovieView[]>(PATH, { params }).toPromise();
   }
 
   getPopularMovies(): Promise<MovieView[]> {

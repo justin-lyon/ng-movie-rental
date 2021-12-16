@@ -71,9 +71,9 @@ export class SignupComponent implements OnInit {
       return message;
     }
 
-    const errors = Object.entries(
-      this.signupForm.controls.password.errors
-    ).map(pair => ({ name: pair[0], value: pair[1] }));
+    const errors = Object.entries(this.signupForm.controls.password.errors).map(
+      pair => ({ name: pair[0], value: pair[1] })
+    );
 
     const errorName = errors[0].name;
     switch (errorName) {

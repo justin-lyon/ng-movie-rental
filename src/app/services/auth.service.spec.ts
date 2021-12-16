@@ -55,14 +55,14 @@ describe('AuthService', () => {
 
   describe('login', () => {
     it('should POST to /auth/login and broadcast', async () => {
-      const textContent = 'username bearer.token.stuff';
+      const textContent = 'bearer.token.stuff';
       http.post = jest.fn().mockReturnValue(of(textContent));
 
       const { email, password } = newUser;
       const result = await service.login(email, password);
       expect(result).toEqual(undefined);
       const storedToken = localStorage.getItem(TOKEN_STORAGE);
-      expect(storedToken).toBe(textContent.split(' ')[1]);
+      expect(storedToken).toBe(textContent);
 
       expect(http.post).toHaveBeenCalledTimes(1);
       expect(http.post).toHaveBeenCalledWith(
