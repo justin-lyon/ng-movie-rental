@@ -46,19 +46,15 @@ context('login page', () => {
   });
 
   describe('submit async validation failure', () => {
-    beforeEach(() => {
-      cy.intercept('POST', 'auth/login', { statusCode: 403 }).as('login');
-    });
-
     it('should report invalid username or password on error', () => {
+      cy.intercept('POST', 'auth/login', { statusCode: 403 }).as('login');
+
       cy.get(container).within(() => {
         typeValue(email, 'burgerbob@burgerfans.net');
         typeValue(password, 'noHumanMe@t123');
         cy.get(loginBtn).click();
 
-        cy.wait('@login').then(({ response }) => {
-          expect(response.statusCode).to.eq(403);
-        });
+        cy.wait('@login').its('response.statusCode').should('eq', 403);
 
         assertMatError('Invalid username or password.');
       });
@@ -66,18 +62,16 @@ context('login page', () => {
   });
 
   describe('submit async validation success', () => {
-    beforeEach(() => {
-      cy.intercept('POST', 'auth/login', { fixture: 'login.txt' }).as('login');
-    });
-
     it('should navigate to /home on success', () => {
+      cy.intercept('POST', 'auth/login', { fixture: 'login.txt' }).as('login');
+
       typeValue(email, 'burgerbob@burgerfans.net');
       typeValue(password, 'noHumanMe@t123');
       cy.get(loginBtn).click();
 
-      cy.wait('@login').then(({ response }) => {
-        expect(response.statusCode).to.eq(200);
-        expect(localStorage.getItem('token')).to.eq(response.body);
+      cy.wait('@login').its('response.statusCode').should('eq', 200);
+      cy.fixture('login.txt').then(data => {
+        expect(localStorage.getItem('token')).to.eq(data);
       });
 
       cy.url().should('include', '/home');
