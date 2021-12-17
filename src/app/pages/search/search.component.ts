@@ -38,7 +38,7 @@ export class SearchComponent implements OnInit {
         this.subtitle = term;
       })
       .catch(error => {
-        console.error(`error searching movies for ${term}`, error);
+        console.error('error searching movies for %s', term, error);
       });
   }
 
